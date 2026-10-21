@@ -1,41 +1,54 @@
 import os
 import requests
+import time
 from dotenv import load_dotenv
 
 load_dotenv()
 
+ERRORES_TEMPORALES = (429, 500, 503)
 MODELO = "gemini-3.6-flash"
 URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
-def armar_peticion(pregunta):
+def armar_peticion(pregunta, modelo=MODELO):
     """Valida la pregunta y arma la URL, los headers y el body."""
     if not pregunta or not pregunta.strip():
         raise ValueError("La pregunta no puede estar vacía.")
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("No se encontró GEMINI_API_KEY. Revisa tu archivo .env.")
-    url = f"{URL_BASE}/{MODELO}:generateContent"
+    url = f"{URL_BASE}/{modelo}:generateContent"
     headers = {"x-goog-api-key": api_key}
     body = {"contents": [{"parts": [{"text": pregunta}]}]}
     return url, headers, body
 
 
-def enviar_peticion(url, headers, body):
-    """Envía la petición y devuelve la respuesta como diccionario."""
-    try:
-        respuesta = requests.post(url, headers=headers, json=body, timeout=30)
-    except requests.exceptions.ConnectionError:
-        raise RuntimeError("No se pudo conectar con el servicio. Revisa tu conexión a internet.")
-    except requests.exceptions.Timeout:
-        raise RuntimeError("El servicio tardó demasiado en responder.")
+def enviar_peticion(url, headers, body, intentos=3):
+    """Envía la petición y devuelve la respuesta como diccionario.
+    Si el servicio está saturado, reintenta esperando cada vez más."""
+    for intento in range(1, intentos + 1):
+        try:
+            respuesta = requests.post(url, headers=headers, json=body, timeout=60)
+        except requests.exceptions.ConnectionError:
+            raise RuntimeError("No se pudo conectar con el servicio. Revisa tu conexión a internet.")
+        except requests.exceptions.Timeout:
+            raise RuntimeError("El servicio tardó demasiado en responder.")
+
+        if respuesta.status_code in ERRORES_TEMPORALES and intento < intentos:
+            espera = 2 ** intento  # 2s, 4s, 8s...
+            print(f"  (servicio ocupado, error {respuesta.status_code}; reintento {intento} en {espera}s)")
+            time.sleep(espera)
+            continue
+        break
 
     if respuesta.status_code in (401, 403):
         raise RuntimeError("La API key es inválida o no tiene permisos.")
-    if respuesta.status_code == 429:
-        raise RuntimeError("Se alcanzó el límite de uso de la API. Espera un momento e intenta de nuevo.")
     if not respuesta.ok:
-        raise RuntimeError(f"El servicio respondió con error {respuesta.status_code}.")
+        try:
+            detalle = respuesta.json().get("error", {}).get("message", "")
+        except requests.exceptions.JSONDecodeError:
+            detalle = ""
+        raise RuntimeError(f"El servicio respondió con error {respuesta.status_code}. {detalle}")
 
     try:
         return respuesta.json()
@@ -56,6 +69,14 @@ def obtener_dato_de_prueba(pregunta):
     url, headers, body = armar_peticion(pregunta)
     datos = enviar_peticion(url, headers, body)
     return extraer_texto(datos)
+
+
+def calcular_costo(datos, precio_entrada, precio_salida):
+    """Calcula el costo en USD de una petición. Los precios son por 1 millón de tokens."""
+    uso = datos.get("usageMetadata", {})
+    tokens_entrada = uso.get("promptTokenCount", 0)
+    tokens_salida = uso.get("candidatesTokenCount", 0) + uso.get("thoughtsTokenCount", 0)
+    return (tokens_entrada * precio_entrada + tokens_salida * precio_salida) / 1_000_000
 
 
 if __name__ == "__main__":
