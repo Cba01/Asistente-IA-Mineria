@@ -1,62 +1,65 @@
-# Respuestas de la comparación de modelos (2026-10-20)
+# Respuestas de la comparación de modelos (2026-10-21)
 
 ### gemini-3.6-flash
 
 **P:** ¿Qué pasos debo seguir antes de intervenir una correa transportadora?
 
-Intervenir una correa o cinta transportadora es una de las actividades de mayor riesgo en la industria debido a los puntos de atrapamiento, la tensión de la banda y el riesgo de arranque imprevisto. 
+Intervenir una correa transportadora es una de las actividades de mayor riesgo en la industria debido a los atrapamientos, caídas de material y energía acumulada. Por ello, es fundamental seguir un estricto protocolo de seguridad antes de tocar cualquier parte del equipo.
 
-Para garantizar la seguridad del personal, se debe seguir un protocolo estricto de **Bloqueo y Etiquetado (LOTO - Lockout/Tagout)** y control de energías. A continuación, se detallan los pasos secuenciales que debes seguir antes de tocar el equipo:
+A continuación, se detallan los pasos clave que debes seguir antes de realizar cualquier intervención (mantenimiento, inspección o reparación):
 
 ---
 
-### 1. Planificación y Autorización
-* **Permisos de Trabajo:** Gestiona el Permiso de Trabajo de Alto Riesgo (PETAR) y la documentación requerida por tu empresa.
-* **Análisis de Riesgos (AST / IPERC):** Evalúa los riesgos específicos del trabajo a realizar (atrapamiento, caída de distinto nivel, proyecciones, etc.) y define las medidas de control.
-* **Coordinación:** Informa al operador de la sala de control (o supervisión) sobre la intervención, el tiempo estimado y la suspensión de operaciones.
+### 1. Planificación y Autorizaciones
+* **Análisis de Riesgos (AST / APR):** Realiza el Análisis de Seguridad en el Trabajo en el lugar. Identifica peligros específicos (puntos de pellizco, altura, carga suspendida, polvo, etc.).
+* **Permiso de Trabajo:** Tramita los permisos correspondientes (Permiso de Trabajo Seguro, Trabajo en Altura, Trabajo en Caliente si vas a soldar/cortar, etc.).
+* **Charla de Seguridad (5 minutos):** Reúne al equipo para repasar las tareas, asignar roles y revisar los riesgos identificados.
 
-### 2. Detención Normal del Equipo
-* Coordina la parada de la correa desde el sistema de control central o la botonera local.
-* **Nota:** Espera a que la correa se detenga por completo. No intentes frenar la banda manualmente ni usando objetos.
+### 2. Coordinación y Comunicación
+* **Notificar a Operaciones/Sala de Control:** Informa al operador del área o sala de control central que la correa transportadora será detenida e intervenida.
+* **Despejar la carga:** Siempre que sea posible, deja correr la correa hasta que quede completamente vacía de material antes de detenerla (salvo en paradas de emergencia).
 
-### 3. Aislamiento y Bloqueo de Energías (LOTO)
-Identifica y aísla **todas** las fuentes de energía que alimentan o afectan a la correa:
-* **Energía Eléctrica:** Corta el interruptor principal (disyuntor/breaker) del motor del accionamiento en la sala de control de motores (CCM).
-* **Aplicación de Candado y Tarjeta:** Cada trabajador que intervenga la correa debe colocar su **candado de seguridad personal** y su **tarjeta de identificación** en la pinza de bloqueo del interruptor principal. *(Un trabajador = Un candado).*
+### 3. Aislamiento y Bloqueo de Energías (Protocolo LOTOTO)
+Este es el paso más crítico (**Lockout / Tagout / Tryout** - Bloqueo, Etiquetado y Verificación):
 
-### 4. Control de Energías Residuales y Mecánicas
-El corte eléctrico no es suficiente. Debes liberar o bloquear la energía acumulada:
-* **Energía Gravitacional (Cintas inclinadas):** Si la correa está inclinada, la gravedad puede hacer que gire hacia atrás o hacia adelante debido al peso del material o de la propia banda. Coloca **frenos mecánicos, trinquete anti-retorno o trabas mecánicas** en el tambor.
-* **Energía Mecánica / Tensión:** La banda tensada almacena energía. Si vas a cortar o empalmar la correa, debes destensarla completamente usando el sistema de tensión (take-up) y/o asegurar la banda con **prensas/gatos para correa** normados.
-* **Otras Energías:** Aísla y purga sistemas neumático o hidráulicos si la correa cuenta con chutes desviadores o limpiadores automatizados.
+* **Detener el equipo:** Desconecta la correa desde el interruptor o botonera local/principal.
+* **Aislamiento Eléctrico:** Corta la energía en el interruptor principal (Breaker/Disyuntor) en la sala eléctrica.
+* **Bloqueo Físico y Etiquetado:**
+  * Cada trabajador que intervenga debe colocar su **candado de seguridad personal** y su **tarjeta de identificación** en la pinza de bloqueo del interruptor eléctrico.
+  * *Regla de oro:* "Un trabajador, un candado, una llave".
+* **Aislamiento de otras energías:** Bloquea fuentes neumáticas o hidráulicas si el sistema cuenta con frenos o tensionadores automáticos.
 
-### 5. Verificación de "Energía Cero" (Prueba de Arracado)
-Antes de acercar cualquier parte del cuerpo a la correa, debes comprobar que el bloqueo fue efectivo:
-* Intentar arrancar la correa desde la botonera local para verificar que no enciende.
-* Verificar visualmente que no haya movimiento de ningún componente.
-* Comprobar la ausencia de tensión eléctrica con un instrumento de medición calibrado (por personal calificado).
-* *Asegúrate de regresar el botón a la posición de "Apagado" después de la prueba.*
+### 4. Liberación y Bloqueo de Energías Residuadas (Mecánica y Gravitacional)
+La energía eléctrica no es la única peligrosa; la energía mecánica acumulada puede ser mortal.
+
+* **Bloqueo del Contrapeso (Take-up):** Asegura o traba mecánicamente el sistema de tensión o contrapeso para evitar que caiga o se mueva por gravedad.
+* **Bloqueo Antirretorno (Backstop):** Si la correa es inclinada, asegúrate de que los sistemas de freno o antirretorno estén asegurados para que la correa no gire en sentido contrario por el peso del material o la tensión.
+* **Liberación de tensión:** Si se va a cortar o empalmar la correa, la tensión de la banda debe ser liberada de forma controlada mediante señores o trócolas aprobadas.
+
+### 5. Verificación de "Energía Cero" (Prueba de Arranque)
+* **Verificar la ausencia de tensión:** Comprueba con instrumentos (si aplica) que no hay energía eléctrica.
+* **Prueba de arranque local:** Intenta arrancar la correa desde la botonera local para confirmar que el bloqueo fue efectivo (**Tryout**). *Asegúrate de que nadie esté cerca de la correa durante esta prueba.*
+* **Regresar el interruptor a "Apagado":** Después de la prueba, deja el selector en posición de apagado (*Off*).
 
 ### 6. Delimitación y Señalización del Área
-* Delimita la zona de trabajo con conos, cadenas o cintas de seguridad (roja o amarilla según el nivel de peligro).
-* Coloca letreros de "Trabajo en Progreso - No Pasar".
+* **Cercar la zona:** Coloca conos, cintas de peligro o barreras rígidas alrededor de la zona de trabajo para evitar que personal ajeno ingrese.
+* **Señalizar:** Coloca letreros visible que indiquen "Personal Trabajando" o "Equipo en Mantenimiento".
 
-### 7. Verificación Final del Equipo de Protección Personal (EPP)
-* Usa EPP básico: Casco con barbiquejo, lentes, calzado de seguridad y guantes.
-* **Regla de oro de vestimenta:** No uses ropa suelta, chalecos desabrochados, cadenas, anillos ni mantén el cabello largo suelto. Todo esto representa un riesgo extremo de enganche.
-* Usa EPP específico si aplica (arnés de seguridad para trabajos en altura si estás sobre la estructura de la correa).
+### 7. Verificación del EPP (Equipo de Protección Personal)
+Asegúrate de contar con el EPP adecuado:
+* **Básico:** Casco con barbiquejo, lentes de seguridad, calzado de seguridad con puntera, chaleco reflectante.
+* **Específico:** 
+  * Arnés de seguridad con doble cabo de vida (si se trabaja en pasarelas elevadas sin barandas estándar).
+  * Guantes de cabritilla o nitrilo (adecuados al tipo de manipulación).
+  * Protección auditiva y respiratoria (para antipolvo).
+* **Precaución vestimentaria:** **PROHIBIDO** usar ropa suelta, corbatas, bufandas, anillos, cadenas o cabello largo suelto, ya que representan un riesgo extremo de atrapamiento.
 
 ---
 
-### Resumen del Check-list antes de tocar la correa:
-1. [ ] ¿Tengo el permiso de trabajo firmado?
-2. [ ] ¿Avisé a la sala de control?
-3. [ ] ¿Puse **mi** candado y tarjeta LOTO en la fuente de poder?
-4. [ ] ¿Bloqueé mecánicamente la correa contra la gravedad/tensión?
-5. [ ] ¿Hice la prueba de "Intento de arranque" (Energía Cero)?
-6. [ ] ¿El área está delimitada y no llevo elementos sueltos en mi ropa?
+### Resumen Visual del Proceso:
+$$\text{Detener equipo} \rightarrow \text{Aislar energía} \rightarrow \text{Bloquear y Etiquetar (LOTOTO)} \rightarrow \text{Asegurar contrapesos/mecánica} \rightarrow \text{Verificar energía cero} \rightarrow \text{Delimitar área} \rightarrow \text{Intervenir}$$
 
-**¡Recuerda!** Nunca confíes únicamente en los tirones de parada de emergencia (cables de paro/Pull Cord) o en las botoneras locales para bloquear un equipo; **estos son dispositivos de control/emergencia, no de aislamiento de energía.**
+> **Nota importante:** Todos los pasos deben estar alineados con los procedimientos internos de Seguridad, Salud Ocupacional y Medio Ambiente (SSOMA) de la empresa o planta donde se realice el trabajo. Si algo no parece seguro, **aplica el derecho a decir "NO" o "Detener el Trabajo".**
 
 ---
 
@@ -64,9 +67,56 @@ Antes de acercar cualquier parte del cuerpo a la correa, debes comprobar que el 
 
 **P:** ¿Qué es el bloqueo y etiquetado de energías y cuándo se aplica?
 
-ERROR: El servicio respondió con error 429. You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash
-Please retry in 4h26m53.648547s.
+*Nota: en la corrida del script esta petición falló con error 429 (límite de 5 peticiones/minuto del plan gratuito). La respuesta se obtuvo después con una petición aislada.*
+
+El **Bloqueo y Etiquetado de Energías** (conocido internacionalmente como **LOTO**, por sus siglas en inglés *Lockout/Tagout*) es un conjunto de procedimientos de seguridad diseñados para **prevenir la puesta en marcha accidental o la liberación de energía peligrosa** de máquinas e instalaciones mientras los trabajadores realizan labores de mantenimiento, reparación o inspección.
+
+---
+
+### ¿En qué consiste cada parte?
+
+1. **Bloqueo (Lockout):** Es la colocación de un dispositivo físico (como un candado o una traba) en el interruptor, válvula o fuente de energía para asegurar que el equipo no pueda activarse hasta que se retire el bloqueo.
+2. **Etiquetado (Tagout):** Es la colocación de una etiqueta de advertencia claramente visible junto al candado. Esta etiqueta indica quién colocó el bloqueo, la fecha, el motivo del trabajo y una advertencia explícita de **no operar** el equipo.
+
+---
+
+### ¿Qué tipos de energía abarca?
+No solo aplica a la electricidad. Incluye todo tipo de energías peligrosas:
+* **Eléctrica** (cables, generadores, motores).
+* **Mecánica** (piezas móviles, resortes bajo tensión).
+* **Hidráulica** (presión de fluidos).
+* **Neumática** (aire comprimido).
+* **Térmica** (vapor, superficies calientes o extremadamente frías).
+* **Química** (gases, ácidos o fluidos peligrosos en tuberías).
+* **Potencial/Gravitacional** (piezas pesadas suspendidas que podrían caer).
+
+---
+
+### ¿Cuándo se debe aplicar?
+
+El procedimiento LOTO se debe aplicar obligatoriamente en las siguientes situaciones:
+
+1. **Trabajos de Mantenimiento y Reparación:** Cuando se realiza cualquier servicio técnico, ajuste o reparación en una máquina o sistema.
+2. **Intervención en la Zona Peligrosa:** Siempre que un trabajador deba introducir alguna parte de su cuerpo (manos, brazos, etc.) dentro del punto de operación de la máquina o cerca de piezas móviles.
+3. **Retiro o Anulación de Protecciones:** Cuando para hacer el trabajo sea necesario retirar resguardos de seguridad, rejillas o puentear dispositivos de protección.
+4. **Limpieza y Desatasco:** Durante labores de limpieza de maquinaria o para liberar material atascado en engranajes, fajas transportadoras o prensas.
+5. **Instalación o Modificación:** Cuando se esté instalando equipo nuevo o modificando el existente.
+
+---
+
+### Pasos básicos del procedimiento LOTO (El estado "Energía Cero")
+
+1. **Preparación:** Identificar todas las fuentes de energía de la máquina.
+2. **Apagado:** Apagar la máquina de forma ordenada según el procedimiento normal.
+3. **Aislamiento:** Desconectar o aislar el equipo de todas sus fuentes de energía (cortar breakers, cerrar válvulas, etc.).
+4. **Aplicación de Bloqueo/Etiquetado:** Colocar el candado personal y la etiqueta en cada punto de aislamiento.
+5. **Liberación de Energía Residual:** Liberar, purgar o bloquear la energía que haya quedado atrapada (presión en mangueras, resortes comprimidos, condensadores eléctricos, etc.).
+6. **Verificación (Prueba de Energía Cero):** Intentar encender la máquina o presionar el botón de arranque para **confirmar al 100% que no funciona** y es segura para intervenir (luego volver a colocar los controles en posición de apagado).
+
+---
+
+### Importancia
+La falta de bloqueo y etiquetado es una de las causas más comunes de accidentes graves y muertes en la industria (amputaciones, electrocuciones, aplastamientos y quemaduras). Es una norma de cumplimiento obligatorio por organismos de salud y seguridad laboral a nivel mundial (como la OSHA).
 
 ---
 
@@ -74,9 +124,54 @@ Please retry in 4h26m53.648547s.
 
 **P:** ¿Qué elementos de protección personal necesito para trabajar en altura?
 
-ERROR: El servicio respondió con error 429. You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash
-Please retry in 4h26m42.918511632s.
+Para realizar trabajos en altura (generalmente considerados a partir de los **1,5 o 1,8 metros** de altura sobre el nivel del suelo, según la legislación de cada país), es obligatorio utilizar un **Sistema Personal de Detención de Caídas (SPDC)** combinado con los Elementos de Protección Personal (EPP) básicos.
+
+A continuación, te detallo el equipo necesario dividido en el sistema específico de altura y la protección personal básica:
+
+---
+
+### 1. Sistema Específico de Protección contra Caídas (Mandatorio)
+
+*   **Arnés de Cuerpo Completo (Arnés Paracaidistas):**
+    *   Debe distribuye las fuerzas de impacto en todo el cuerpo (muslos, pelvis, tórax y hombros).
+    *   **Prohibido el uso de cinturones fajas para detención de caídas** (solo se usan para posicionamiento).
+    *   Debe contar con argollas en "D" (mínimo en la espalda para caídas, y opcionalmente en el pecho, cintura o hombros según la tarea).
+*   **Eslinga o Cabo de Vida (Lanyard):**
+    *   **Con Absorbedor de Impacto (Disipador de energía):** Imprescindible para trabajos en altura. Reduce la fuerza del impacto en el cuerpo del trabajador a niveles seguros en caso de caída.
+    *   **Eslinga en "Y" (Doble cabo):** Es la más recomendada porque permite al trabajador desplazarse estando siempre enganchado a un punto seguro (100% de conexión continua).
+*   **Conectores y Mosquetones:**
+    *   Deben ser de cierre y bloqueo automático (de doble o triple seguridad) para evitar aperturas accidentales.
+    *   Fabricados en acero o aluminio de alta resistencia.
+*   **Líneas de Vida y Dispositivos Anticaídas:**
+    *   **Líneas de vida (temporales o fijas):** Cables de acero o cuerdas certificadas donde se conecta la eslinga.
+    *   **Bloqueadores / Salva-vidas (Rope grab):** Dispositivos que se deslizan por la cuerda o cable y se bloquean automáticamente ante una caída.
+    *   **Líneas de vida retráctiles:** Funcionan como el cinturón de seguridad de un auto; permiten movilidad y se bloquean al detectar una aceleración brusca.
+
+---
+
+### 2. EPP Básico y Complementario para Altura
+
+*   **Casco de Seguridad con Barboquejo (Barbijo):**
+    *   El barboquejo (barbijo de 3 o 4 puntos de sujeción) es **obligatorio**. Evita que el casco se caiga de la cabeza durante la caída o por acción del viento, protegiendo el cráneo de impactos contra la estructura.
+*   **Calzado de Seguridad:**
+    *   Con suela antideslizante (con grabado profundo) para evitar resbalones.
+    *   Puntera de protección (acero o composite) y buen soporte para el tobillo.
+*   **Guantes de Protección:**
+    *   Deben ofrecer un buen agarre (antideslizantes), resistencia a la abrasión y permitir la destreza manual para manipular mosquetones y herramientas.
+*   **Gafas / Lentes de Seguridad:**
+    *   Con protección contra rayos UV, viento, polvo o proyección de partículas. Preferiblemente con sujetador para evitar que caigan.
+*   **Ropa de Trabajo Ajustada:**
+    *   La ropa debe ser entallada (ni muy holgada ni con partes colgantes) para evitar que se enganche en estructuras, andamios o en el propio arnés.
+
+---
+
+### 3. Consideraciones y Reglas de Oro
+
+1.  **Certificación:** Todo el equipo (arnés, eslingas, mosquetones, casco) debe estar **certificado** bajo normas internacionales o locales (ej. ANSI, CE, EN, OSHA, IRAM, etc.).
+2.  **Inspección Previa:** Antes de cada uso, el trabajador debe realizar una **inspección visual y táctil** del equipo (buscar costuras rotas, desgaste en cintas, grietas en componentes metálicos, quemaduras o corrosión).
+3.  **Punto de Anclaje:** El equipo no sirve de nada si se conecta a un lugar débil. El punto de anclaje debe ser estructural y capaz de resistir al menos **22 kN (aprox. 2.260 kg o 5.000 lbs)** por persona conectada.
+4.  **Capacitación:** El trabajador **debe estar capacitado y certificado** en "Trabajos en Altura" para saber cómo colocarse el arnés, calcular la distancia libre de caída y reaccionar ante una emergencia.
+5.  **Plan de Rescate:** Siempre se debe contar con un plan de rescate previo, ya que una persona suspendida en un arnés puede sufrir el "Síndrome del Arnés" (trauma por suspensión) en pocos minutos.
 
 ---
 
@@ -84,49 +179,39 @@ Please retry in 4h26m42.918511632s.
 
 **P:** ¿Qué pasos debo seguir antes de intervenir una correa transportadora?
 
-Intervenir una correa transportadora (ya sea para mantenimiento, reparación, limpieza o ajuste) es una actividad de alto riesgo que involucra energías peligrosas (mecánica, eléctrica, gravitacional). 
+Intervenir una correa transportadora es una actividad de alto riesgo debido a las fuerzas mecánicas, la energía almacenada y las partes móviles involucradas. Para garantizar la seguridad del personal, se debe seguir estrictamente un procedimiento de **Bloqueo, Etiquetado y Verificación de Energía Cero (LOTO)**, además de otras medidas operativas.
 
-Para garantizar la seguridad del personal, se debe seguir estrictamente un procedimiento de **Bloqueo, Etiquetado y Verificación (LOTO - *Lockout/Tagout*)** junto con otras medidas operativas. A continuación, se detallan los pasos que debes seguir antes de iniciar cualquier intervención:
+A continuación, te presento los pasos que debes seguir antes de realizar cualquier intervención:
 
----
+### 1. Preparación y Planificación
+*   **Permisos de trabajo:** Obtén los permisos necesarios (trabajo en caliente, en altura, espacio confinado, etc., según corresponda).
+*   **Herramientas adecuadas:** Asegúrate de contar con las herramientas, equipos de izaje y EPP (Equipo de Protección Personal) específicos para la tarea. El EPP básico incluye casco, gafas de seguridad, guantes anticorte/antigolpes, calzado de seguridad y ropa ajustada (sin partes colgantes que puedan ser atrapadas).
+*   **Personal capacitado:** Solo personal autorizado y certificado debe realizar la intervención.
 
-### Paso 1: Planificación y Autorización
-*   **Permiso de Trabajo:** Obtén los permisos de trabajo necesarios (trabajo en caliente, en altura, espacio confinado, etc., según corresponda).
-*   **Difusión:** Informa al personal de operaciones y áreas cercanas que la correa va a ser detenida e intervenida.
+### 2. Protocolo LOTO (Lockout, Tagout, Tryout) - *El paso más crítico*
+*   **Notificación:** Avisa a los operadores del área y personal cercano que la correa va a ser detenida e intervenida.
+*   **Parada de emergencia:** Detén la correa utilizando el botón de parada normal y verifica que se detenga por completo.
+*   **Corte de energía (Bloqueo):** Desconecta la fuente de alimentación principal del motor en el tablero eléctrico (interruptor principal o CCM - Centro de Control de Motores). Coloque su candado de seguridad para evitar que sea energizado.
+*   **Etiquetado (Tagout):** Coloca una tarjeta de advertencia visible que indique "PELIGRO - NO OPERAR / EQUIPO EN MANTENIMIENTO", incluyendo tu nombre y fecha.
+*   **Disipación de energía almacenada:** 
+    *   **Tensión mecánica:** Si la correa tiene contrapesos, estos deben ser asegurados (trabados) para evitar caídas.
+    *   **Energía potencial:** Si el transportador está inclinado, asegúrate de que la correa no pueda girar por gravedad (frenos antiretorno o trabas mecánicas).
+    *   **Presencia de resortes o acumuladores:** Libera o bloquea cualquier energía elástica o hidráulica residual.
 
-### Paso 2: Parada Normal del Sistema
-*   Comunícate con la sala de control o utiliza el panel local para **detener la correa transportadora** siguiendo el procedimiento operativo estándar.
-*   Permite que la correa se detenga por completo y que todo el material transportado sea evacuado (si es posible) para evitar sobrecargas o deslizamientos al reiniciar.
+### 3. Verificación de Energía Cero (Probar antes de tocar)
+*   **Intento de arranque ("Tryout"):** Dirígete al panel de control local o pulsa el botón de arranque de la correa para **verificar que el equipo no responda**. Esto confirma que el bloqueo eléctrico fue efectivo.
+*   **Comprobación visual y física:** Asegúrate de que todas las partes móviles (tambores, rodillos, poleas y la propia banda) estén completamente inmóviles.
 
-### Paso 3: Aislamiento de Energías (Corte de Energía)
-*   **Corte Eléctrico:** Desconecta el interruptor principal o breaker del motor del输送机 (transportador).
-*   **Corte de Sistemas Auxiliares:** Si aplica, aísla sistemas hidráulicos, neumáticos o de calefacción asociados al equipo.
+### 4. Delimitación del Área
+*   Instala cinta de seguridad, vallas o letreros alrededor de toda la zona de trabajo (incluyendo los extremos de carga y descarga, y la zona de contrapesos) para evitar el acceso de personal no autorizado.
 
-### Paso 4: Bloqueo y Etiquetado (LOTO)
-*   Coloca tu **candado de seguridad** y tu **tarjeta de identificación** (que indique "Peligro, no operar - Personal trabajando") en el dispositivo de aislamiento de energía (interruptor, válvula, etc.).
-*   Cada técnico que participe en la intervención debe colocar su propio candado.
-
-### Paso 5: Disipación y Control de Energías Residuales
-*   **Energía Mecánica/Gravitacional:** Si la correa está inclinada, asegúrate de colocar **trabas mecánicas, frenos o cepos** para evitar que retroceda por el peso del material o la gravedad.
-*   **Tensión de la Correa:** Si se va a trabajar en empalmes o rodillos, libera la tensión de los tensores (contrapesos o tornillos tensores) si es necesario.
-*   **Energía Almacenada:** Descarga cualquier acumulador hidráulico o resorte tensor que pueda liberarse bruscamente.
-
-### Paso 6: Verificación de Energía Cero (La Prueba de Fuego)
-*   **Intento de Arranque:** Dirígete al panel de control local o presiona el botón de encendido ("Start") para **verificar que el equipo no arranca**. 
-*   Utiliza un multímetro u otro instrumento de medición para comprobar que **no hay voltaje** en los cables del motor.
-*   Verifica visualmente que todas las partes móviles estén completamente detenidas.
-
-### Paso 7: Delimitación del Área de Trabajo
-*   Coloca cintas de peligro, conos o barreras físicas alrededor de toda la zona de trabajo (especialmente en las zonas de poleas de cola y cabeza, donde hay mayor riesgo de atrapamiento).
-*   Coloca carteles visibles de "Hombre trabajando en la máquina".
-
-### Paso 8: Uso de Elementos de Protección Personal (EPP) específicos
-*   Asegúrate de contar con el EPP obligatorio: casco, lentes de seguridad, calzado de seguridad, guantes anticorte o de maniobra (según el riesgo), y ropa ajustada (sin partes sueltas que puedan ser atrapadas).
+### 5. Inspección Final antes de iniciar
+*   Realiza una charla de seguridad de 5 minutos (toolbox talk) con el equipo de trabajo para repasar los riesgos específicos de la tarea.
+*   Confirma que las salidas de emergencia estén despejadas.
 
 ---
 
-### ⚠️ Resumen de la Regla de Oro:
-**"Cierra, Bloquea, Etiqueta, Prueba y Verifica"** antes de tocar cualquier componente de la correa transportadora. Nunca confíes únicamente en que el botón de parada de emergencia (seta roja) es suficiente; este debe complementarse siempre con el bloqueo eléctrico (LOTO).
+**⚠️ REGLA DE ORO:** *Nunca confíes ciegamente en que el equipo está apagado. Aplica siempre el principio de "verificar energía cero" antes de introducir las manos o herramientas en una correa transportadora.*
 
 ---
 
@@ -134,54 +219,58 @@ Para garantizar la seguridad del personal, se debe seguir estrictamente un proce
 
 **P:** ¿Qué es el bloqueo y etiquetado de energías y cuándo se aplica?
 
-El **bloqueo y etiquetado** (conocido en inglés como **LOTO**: *Lockout/Tagout*) es un procedimiento de seguridad industrial esencial que se utiliza para garantizar que las máquinas y equipos peligrosos estén completamente desenergizados y no puedan ponerse en marcha de manera accidental mientras se realizan trabajos de mantenimiento, reparación o limpieza.
+El **bloqueo y etiquetado** (conocido en inglés como **LOTO**: *Lockout/Tagout*) es un procedimiento de seguridad industrial esencial diseñado para proteger a los trabajadores contra la puesta en marcha inesperada de máquinas, equipos o la liberación de energía peligrosa durante las actividades de mantenimiento, reparación o limpieza.
 
-A continuación, te explico en detalle en qué consiste y cuándo se aplica:
-
----
-
-### 1. ¿Qué es el bloqueo y etiquetado?
-
-Es un sistema de protección que consta de dos acciones principales:
-
-*   **Bloqueo (Lockout):** Consiste en colocar un dispositivo físico (como un candado, pinza o cerrojo) en el mecanismo de aislamiento de energía (interruptores, válvulas, llaves de paso) para asegurar que el equipo no pueda ser operado.
-*   **Etiquetado (Tagout):** Consiste en colocar una etiqueta de advertencia visible que indique claramente que el equipo está siendo intervenido, quién lo está haciendo y que **no debe ser operado** bajo ninguna circunstancia. La etiqueta tiene un propósito informativo y disuasorio (generalmente se usa junto con el candado).
+A continuación, se detalla en qué consiste y cuándo se aplica:
 
 ---
 
-### 2. ¿Cuándo se aplica?
+### ¿En qué consiste el sistema LOTO?
 
-El LOTO se aplica **siempre que exista el riesgo de que una máquina o equipo libere energía de forma inesperada** durante actividades donde los trabajadores puedan estar expuestos. Esto incluye situaciones de:
+Se divide en dos acciones principales:
 
-1.  **Mantenimiento y reparación:** Arreglar piezas rotas, ajustar correas, cambiar rodamientos, etc.
-2.  **Tareas de limpieza y lubricación:** Especialmente cuando hay que retirar guardas de seguridad o acercarse a partes móviles.
-3.  **Instalación y montaje:** Conectar nuevos equipos o modificar líneas de producción.
-4.  **Desatascos:** Cuando se intenta liberar material atascado en tolvas, cintas transportadoras o maquinaria pesada.
-
-#### ¿Qué tipos de energía controla?
-Cualquier fuente de energía peligrosa, que puede ser:
-*   **Eléctrica:** (La más común: cables, tableros, transformadores).
-*   **Mecánica:** (Partes móviles, resortes tensados, piezas pesadas suspendidas).
-*   **Neumática e Hidráulica:** (Aire a presión, fluidos bajo presión en pistones o mangueras).
-*   **Térmica:** (Vapor, tuberías calientes, calderas).
-*   **Química:** (Flujo de sustancias peligrosas por tuberías).
-*   **Gravitacional:** (Equipos o cargas que pueden caer por su propio peso).
+1.  **Bloqueo (Lockout):** Consiste en colocar un dispositivo físico (como un candado, pasador o abrazadera) en el mecanismo de aislamiento de energía (interruptores, válvulas, llaves de paso) para garantizar que el equipo no pueda ser operado mientras el candado esté puesto. Cada trabajador autorizado tiene su propia llave.
+2.  **Etiquetado (Tagout):** Es la colocación de una etiqueta de advertencia visible que indica claramente que el equipo está siendo reparado, que **no debe ser operado** y quién es la persona responsable del trabajo. *(Nota: La etiqueta por sí sola es una advertencia; el candado es la barrera física).*
 
 ---
 
-### 3. Pasos básicos de un procedimiento LOTO
+### ¿Cuándo se aplica?
 
-Aunque varía según la empresa y el equipo, un procedimiento estándar consta de 6 pasos:
+El procedimiento LOTO se aplica **siempre que** exista la posibilidad de que un equipo o maquinaria libere energía de forma inesperada y cause lesiones a los trabajadores. Específicamente, se debe aplicar durante:
 
-1.  **Preparación y notificación:** Avisar a los operadores y afectados que la máquina se va a apagar y por qué.
-2.  **Apagado del equipo:** Detener la máquina siguiendo el procedimiento normal de parada.
-3.  **Aislamiento de la energía:** Desconectar la fuente de energía (bajar breakers, cerrar válvulas).
-4.  **Aplicación de bloqueo y etiquetado:** Colocar los candados y las tarjetas en los dispositivos de aislamiento.
-5.  **Disipación de energía residual:** Asegurarse de que no quede energía almacenada (purgar aire, descargar condensadores eléctricos, bloquear piezas suspendidas).
-6.  **Verificación de energía cero:** Intentar encender el equipo desde los controles normales para comprobar que realmente está desenergizado.
+1.  **Tareas de mantenimiento y reparación:** Cuando se debe intervenir la maquinaria para ajustar piezas, lubricar, reparar averías o cambiar componentes internos.
+2.  **Trabajos de limpieza y desatasco:** Cuando hay que retirar materiales atascados en zonas peligrosas (como cintas transportadoras, trituradoras o rodillos).
+3.  **Instalación y montaje:** Al instalar nuevas máquinas o realizar modificaciones mayores en sistemas existentes.
+4.  **Retirada o puenteo de guardas de seguridad:** Cuando es necesario abrir o quitar cubiertas, escudos o sensores de seguridad que normalmente protegen al trabajador de partes móviles.
 
-### Resumen
-El bloqueo y etiquetado es una barrera vital para **salvar vidas**. Su objetivo es evitar muertes y lesiones graves (como amputaciones, electrocuciones o aplastamientos) causadas por la **energía peligrosa** y el arranque imprevisto de las máquinas.
+---
+
+### Tipos de energía que controla
+
+El bloqueo y etiquetado no solo aplica a la electricidad, sino a **cualquier tipo de energía peligrosa**, tales como:
+
+*   **Eléctrica:** (La más común: tableros, motores, cables).
+*   **Neumática:** (Aire comprimido).
+*   **Hidráulica:** (Presión de fluidos y aceites).
+*   **Mecánica:** (Partes en movimiento, resortes tensados, contrapesos).
+*   **Térmica:** (Vapor, tuberías calientes, hornos).
+*   **Química:** (Líneas de productos tóxicos, ácidos o inflamables).
+*   **Gravitacional:** (Partes de máquinas suspendidas que puedan caer por gravedad).
+
+---
+
+### Los 6 pasos básicos del procedimiento LOTO
+
+Para aplicar correctamente este sistema, las empresas suelen seguir estos pasos:
+
+1.  **Preparación:** Identificar el tipo y magnitud de la energía, los riesgos y los medios para aislarla.
+2.  **Notificación:** Avisar a los operadores y afectados que el equipo va a ser detenido y bloqueado.
+3.  **Apagado:** Detener la máquina utilizando los controles normales de parada.
+4.  **Aislamಿತು y Bloqueo/Etiquetado:** Desconectar la fuente de energía y colocar los dispositivos de bloqueo y etiquetas correspondientes.
+5.  **Disipación de energía residual:** Liberar o asegurar cualquier energía almacenada (purgar aire, descargar condensadores eléctricos, bloquear piezas suspendidas).
+6.  **Verificación:** Comprobar que el aislamiento ha sido efectivo intentando encender el equipo (prueba de arranque en "cero energía"). Una vez comprobado, se devuelven los controles a la posición de apagado.
+
+**En resumen:** El LOTO es una salvaguarda vital que convierte una máquina potencialmente mortal en un entorno de trabajo seguro durante las intervenciones técnicas.
 
 ---
 
@@ -189,7 +278,7 @@ El bloqueo y etiquetado es una barrera vital para **salvar vidas**. Su objetivo 
 
 **P:** ¿Qué elementos de protección personal necesito para trabajar en altura?
 
-Trabajar en altura (generalmente considerado a partir de **1.80 metros** sobre el nivel del suelo, según la mayoría de las normativas de seguridad industrial) requiere un sistema de protección riguroso. 
+Trabajar en altura (generalmente considerado a partir de **1.80 metros** sobre el nivel del suelo, según la mayoría de las normativas de seguridadindustrial) requiere un sistema de protección riguroso. 
 
 Los Elementos de Protección Personal (EPP) se dividen en dos categorías principales: **Equipos para la Prevención de Caídas** (los más críticos) y **Equipos de Protección Básica**.
 
@@ -198,41 +287,34 @@ Aquí tienes el listado completo de lo que necesitas:
 ---
 
 ### 1. Sistema Personal de Detención de Caídas (SPDC)
-Este es el conjunto fundamental para evitar que, en caso de caída, sufras lesiones graves o fatales. Debe estar certificado bajo normas internacionales (como ANSI/OSHA o CE/EN).
+Este es el conjunto de elementos vitales que evitan que golpees el suelo en caso de una caída. Debe cumplir con certificaciones internacionales (como ANSI/OSHA o CE).
 
-*   **Arnés de cuerpo entero:** Es obligatorio (nunca uses cinturones de seguridad simples, ya que pueden causar lesiones graves en la columna o asfixia en suspensión). Debe ajustar correctamente a tus piernas, torso y hombros, y contar con una argolla dorsal (en la espalda) para la detención de caídas.
-*   **Línea de vida con absorbedor de impacto (Eslinga):** Es la cuerda o cinta que conecta tu arnés al punto de anclaje. El absorbedor de impacto es vital, ya que se abre en caso de caída para reducir la fuerza del tirón sobre tu cuerpo.
-*   **Conector de anclaje (Eslinga de posicionamiento o freno de soga):** Si necesitas moverte a lo largo de una estructura o usar escalas, necesitas un sistema anticaídas deslizante (freno de soga) o una línea de posicionamiento para mantener las manos libres.
-*   **Mosquetones de doble seguro:** Deben ser de acero o aluminio de alta resistencia, con un mecanismo de cierre automático y doble o triple seguro para evitar aperturas accidentales.
-*   **Puntos de anclaje certificados:** Aunque no es un EPP que llevas puesto, es parte del sistema. Deben soportar al menos 2,300 kg (5,000 libras) por trabajador conectado.
-
----
-
-### 2. Equipos de Protección Básica (Obligatorios en cualquier obra)
-Además del equipo anticaídas, debes usar el EPP estándar para protegerte de golpes, caídas de objetos y condiciones ambientales:
-
-*   **Casco con barbiquejo (barbuquejo):** El casco protege contra impactos desde arriba, pero **debe tener barbiquejo** (correa para la barbilla) para evitar que se caiga mientras miras hacia arriba o si sufres una caída.
-*   **Calzado de seguridad:** Botas con suela antideslizante (idealmente dieléctricas si trabajas cerca de electricidad) y puntera de acero para proteger contra la caída de objetos pesados en los pies.
-*   **Gafas de seguridad:** Con protección UV y anti-rayaduras, para evitar que el viento, el polvo o partículas extrañas entren en tus ojos a cierta altura.
-*   **Guantes de protección:** Dependiendo de la tarea:
-    *   *Antideslizantes o de poliuretano* para mejor agarre de cuerdas y estructuras.
-    *   *De cuero o cabritilla* para trabajos de montaje.
-    *   *Dieléctricos* si hay riesgo eléctrico.
-*   **Ropa de trabajo adecuada:** Ropa ajustada que no sea propensa a engancharse en estructuras o maquinaria. Si trabajas a la intemperie, protección solar o ropa térmica.
+*   **Arnés de cuerpo entero:** Es el elemento central. Debe ajustarse perfectamente al cuerpo. Distribuye la fuerza del impacto de la caída en muslos, pelvis, pecho y hombros. *Nunca se debe trabajar en altura con un cinturón maicero (solo de cintura).*
+*   **Elemento de amarre (Eslinga / Cabo de vida):** Conecta el arnés al punto de anclaje.
+    *   *Eslinga con absorbedor de impacto:* Disipa la energía de la caída para que el cuerpo no sufra daños severos.
+    *   *Eslinga de posicionamiento:* Sirve para mantener las manos libres mientras se trabaja apoyado en una estructura (no sirve para detener caídas).
+*   **Línea de vida (Vertical u Horizontal):** Cuerdas o cables donde se conecta el trabajador. Si es vertical, requiere un **freno de soga** (asa-caídas) que se bloquea automáticamente ante una caída.
+*   **Conectores (Mosquetones y ganchos):** Deben tener doble mecanismo de seguridad para evitar aperturas accidentales.
+*   **Dispositivos retráctiles:** Eslingas que se enrollan automáticamente como el cinturón de seguridad de un auto, deteniendo la caída en pocos centímetros.
 
 ---
 
-### 3. Equipos según tareas específicas (Opcionales / Complementarios)
-*   **Líneas de vida retráctiles:** Se usan en trabajos donde necesitas moverte vertical u horizontalmente con mayor libertad; se enrollan y desenrollan automáticamente y bloquean la caída de inmediato.
-*   **Sillas suspensorias o andamios certificados:** Si vas a estar suspendido por largas horas (como en limpieza de vidrios o pintura de fachadas).
-*   **Protección respiratoria:** Si trabajas en altura en zonas con polvo, gases o vapores (pintura, demolición).
+### 2. EPP Básico (Protección General)
+Además del sistema anticaídas, debes usar el equipo de protección estándar adecuado para la tarea y el entorno:
+
+*   **Casco con barbiquejo (jugular):** Es **obligatorio** que tenga barbiquejo para que el casco no se caiga de la cabeza si el trabajador se desploma o si hay vientos fuertes.
+*   **Calzado de seguridad:** Con suela antideslizante (idealmente dieléctrico si hay riesgo eléctrico). Si se trabaja en andamios o estructuras metálicas, la puntera de acero protege de golpes.
+*   **Guantes de protección:** Dependiendo de la tarea (anticorte, dieléctricos, de cuero para manipulación de cuerdas, etc.). Deben permitir un buenagarre.
+*   **Gafas de seguridad:** Protegen contra polvo, viento o partículas que puedan afectar la visión y causar una pérdida de equilibrio.
+*   **Protección auditiva y respiratoria:** Solo si las condiciones de la tarea lo requieren (ruido, polvo, vapores).
+*   **Ropa de alta visibilidad:** Si se trabaja en exteriores, vías públicas o zonas con tráfico de maquinaria.
 
 ---
 
-### ⚠️ Reglas de oro antes de usar tu EPP:
-1.  **Inspección previa:** Revisa siempre tu arnés, costuras, argollas y cuerdas antes de usarlos. Si tienen cortes, desgaste excesivo o químicos, **deséchalos**.
-2.  **Capacitación:** Ningún EPP es seguro si no sabes usarlo. Debes contar con una **certificación o curso de trabajo en altura** vigente.
-3.  **Plan de rescate:** Nunca trabajes en altura solo. Siempre debe haber alguien capacitado abajo listo para activar un rescate en caso de que quedes suspendido en tu arnés (el "síndrome del arnés" o trauma por suspensión puede ser fatal en pocos minutos).
+### ⚠️ Nota crucial (Más allá del EPP):
+Ningún EPP sirve por sí solo si no se cuenta con:
+1.  **Puntos de anclaje certificados:** Deben soportar al menos 2,268 kg (5,000 libras) por trabajador.
+2.  **Capacitación:** En muchos países es legalmente obligatorio contar con un curso/certificación de **Trabajo en Altura vigente**.
+3.  **Plan de rescate:** Saber qué hacer y tener los elementos listos (como camillas, sistemas de descenso y poleas) en caso de que alguien quede suspendido en su arnés, ya que el *“síndrome del arnés”* (ortostatismo) puede causar daños graves o la muerte en pocos minutos debido a la falta de circulación sanguínea.
 
 ---
-
