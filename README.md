@@ -227,8 +227,9 @@ La aplicación nunca termina con un *Traceback*. Ante cualquier falla muestra un
 
 ## Registro del ensayo de instalación limpia
 
-- **Fecha:** _AAAA-MM-DD_
+- **Fecha:** 2026-10-22
 - **Procedimiento:** se clonó el repositorio en una carpeta nueva, se creó un entorno virtual nuevo, se instalaron las dependencias desde `requirements.txt`, se creó el `.env` desde `.env.example` y se ejecutó `main.py` siguiendo solo este README.
-- **Hallazgos:** _(completar: lo que falló o "sin hallazgos")_
-- **Correcciones:** _(completar, si hubo)_
-- **Resultado:** _(completar)_
+- **Hallazgos:** sin fallas de instalación ni de ejecución. Durante la prueba la API respondió dos veces con error 503 (servicio saturado), y los reintentos automáticos lo resolvieron sin intervención.
+- **Verificaciones adicionales:** una consulta vacía muestra un mensaje de error claro, sin Traceback; `git status` en la copia clonada confirma que `.env` y `venv/` están excluidos.
+- **Correcciones:** no fueron necesarias.
+- **Resultado:** la aplicación se instaló y ejecutó correctamente siguiendo solo este README.
