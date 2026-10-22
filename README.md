@@ -175,7 +175,7 @@ El módulo `src/consumir_gemini.py` separa cada responsabilidad en su propia fun
 | `parsear_respuesta_json` | Convierte la respuesta en un diccionario y valida que tenga las claves esperadas. |
 | `calcular_costo` | Calcula el costo en USD, incluidos los tokens de "pensamiento" del modelo. |
 
-La elección del modelo (`gemini-3.6-flash` frente a `gemini-3.5-flash-lite`) está documentada en [`docs/decision-arquitectura.md`](docs/decision-arquitectura.md).
+La elección del modelo (`gemini-3.6-flash` frente a `gemini-3.5-flash-lite`) está documentada en [`docs/decision_arquitectura.md`](docs/decision_arquitectura.md).
 
 ---
 
@@ -220,7 +220,7 @@ La aplicación nunca termina con un *Traceback*. Ante cualquier falla muestra un
 ## Limitaciones conocidas
 
 - Las respuestas provienen del conocimiento general del modelo y **no citan normativa chilena** (por ejemplo, el DS 132). Esto se abordará con RAG sobre documentos propios en el Módulo 2.
-- El modelo puede **omitir pasos** de un procedimiento u ofrecer listas de EPP que varían entre ejecuciones (ver [`prompts/README.md`](prompts/README.md)). Por eso cada respuesta termina con una advertencia.
+- El modelo puede **omitir pasos** de un procedimiento u ofrecer listas de EPP que varían entre ejecuciones 
 - El plan gratuito de la API limita la cantidad de peticiones por minuto y por día.
 
 ---

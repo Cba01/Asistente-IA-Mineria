@@ -2,6 +2,7 @@ import time
 from datetime import date
 from consumir_gemini import armar_peticion, enviar_peticion, extraer_texto, calcular_costo
 
+# Precios por 1M de tokens (USD), plan pagado. Fuente: ai.google.dev/gemini-api/docs/pricing
 MODELOS = {
     "gemini-3.6-flash":      {"entrada": 0.75, "salida": 3.75},
     "gemini-3.5-flash-lite": {"entrada": 0.30, "salida": 2.50},
@@ -9,6 +10,7 @@ MODELOS = {
 
 PREGUNTA_LATENCIA = "Confirma en una frase corta que esta conexión funciona"
 
+# Preguntas reales de mi caso, para evaluar la calidad
 PREGUNTAS_CASO = [
     "¿Qué pasos debo seguir antes de intervenir una correa transportadora?",
     "¿Qué es el bloqueo y etiquetado de energías y cuándo se aplica?",
@@ -23,7 +25,7 @@ def medir_latencia(modelo, repeticiones=4):
     latencias = []
     datos = None
     for i in range(repeticiones):
-        url, headers, body = armar_peticion(PREGUNTA_LATENCIA, modelo)
+        url, headers, body = armar_peticion(PREGUNTA_LATENCIA, modelo=modelo)
         inicio = time.perf_counter()
         try:
             datos = enviar_peticion(url, headers, body, intentos=1)
@@ -39,7 +41,7 @@ def medir_latencia(modelo, repeticiones=4):
 def evaluar_calidad(modelo):
     """Hace las preguntas del caso y guarda las respuestas completas en el archivo."""
     for pregunta in PREGUNTAS_CASO:
-        url, headers, body = armar_peticion(pregunta, modelo)
+        url, headers, body = armar_peticion(pregunta, modelo=modelo)
         try:
             texto = extraer_texto(enviar_peticion(url, headers, body))
         except RuntimeError as error:
@@ -51,6 +53,7 @@ def evaluar_calidad(modelo):
 
 
 def main():
+    # Partimos con el archivo limpio, con la fecha de la comparación
     with open(ARCHIVO_RESPUESTAS, "w", encoding="utf-8") as archivo:
         archivo.write(f"# Respuestas de la comparación de modelos ({date.today()})\n\n")
 
