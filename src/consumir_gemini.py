@@ -1,17 +1,22 @@
+import json
 import os
-import requests
+import re
 import time
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
 ERRORES_TEMPORALES = (429, 500, 503)
-MODELO = "gemini-3.6-flash"
+MODELO = os.getenv("GEMINI_MODEL") or "gemini-3.6-flash"
 URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
-def armar_peticion(pregunta, modelo=MODELO):
-    """Valida la pregunta y arma la URL, los headers y el body."""
+def armar_peticion(pregunta, system_instruction=None, response_schema=None, modelo=MODELO):
+    """Valida la pregunta y arma la URL, los headers y el body.
+    system_instruction: instrucciones de comportamiento, separadas de la pregunta del usuario.
+    response_schema: si se entrega, obliga al modelo a responder JSON con esa estructura."""
     if not pregunta or not pregunta.strip():
         raise ValueError("La pregunta no puede estar vacía.")
     api_key = os.getenv("GEMINI_API_KEY")
@@ -20,6 +25,13 @@ def armar_peticion(pregunta, modelo=MODELO):
     url = f"{URL_BASE}/{modelo}:generateContent"
     headers = {"x-goog-api-key": api_key}
     body = {"contents": [{"parts": [{"text": pregunta}]}]}
+    if system_instruction:
+        body["systemInstruction"] = {"parts": [{"text": system_instruction}]}
+    if response_schema:
+        body["generationConfig"] = {
+            "responseMimeType": "application/json",
+            "responseSchema": response_schema,
+        }
     return url, headers, body
 
 
@@ -64,8 +76,25 @@ def extraer_texto(datos):
         raise RuntimeError("La respuesta no trae el texto generado en el lugar esperado.")
 
 
+def parsear_respuesta_json(texto, claves_esperadas):
+    """Convierte el texto del modelo en diccionario y valida que traiga las claves esperadas."""
+    texto_limpio = texto.strip()
+    texto_limpio = re.sub(r"^```(?:json)?\s*", "", texto_limpio)  # quita ```json del inicio
+    texto_limpio = re.sub(r"\s*```$", "", texto_limpio)  # quita ``` del final
+    try:
+        datos = json.loads(texto_limpio)
+    except json.JSONDecodeError:
+        raise ValueError("La respuesta del modelo no es JSON válido.")
+    if not isinstance(datos, dict):
+        raise ValueError("La respuesta no es un objeto JSON.")
+    faltantes = [clave for clave in claves_esperadas if clave not in datos]
+    if faltantes:
+        raise ValueError(f"La respuesta no tiene las claves esperadas: {faltantes}")
+    return datos
+
+
 def obtener_dato_de_prueba(pregunta):
-    """Función principal: orquesta las otras tres."""
+    """Función principal: orquesta armar_peticion, enviar_peticion y extraer_texto."""
     url, headers, body = armar_peticion(pregunta)
     datos = enviar_peticion(url, headers, body)
     return extraer_texto(datos)
