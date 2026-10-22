@@ -1,0 +1,17 @@
+{
+  "clasificar_riesgo": {
+    "exitos": 3,
+    "intentos": 3,
+    "fallos": []
+  },
+  "extraer_epp": {
+    "exitos": 3,
+    "intentos": 3,
+    "fallos": []
+  },
+  "resumir_procedimiento": {
+    "exitos": 3,
+    "intentos": 3,
+    "fallos": []
+  }
+}
