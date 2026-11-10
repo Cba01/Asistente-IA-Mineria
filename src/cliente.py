@@ -1,18 +1,27 @@
 """Cliente modular para consumir la API de Gemini.
 
 Expone una sola función pública, consultar_modelo(), que por dentro arma la petición,
-la envía con reintentos y devuelve el texto. Clasifica los errores en dos tipos:
+la envía con reintentos, registra su costo y devuelve el texto. Clasifica los errores en dos tipos:
 - ValueError: errores de configuración que no se arreglan reintentando (key inválida, modelo inexistente).
 - TimeoutError: errores temporales que sí vale la pena reintentar (límite de uso, servidor caído, red).
 
 Uso desde la raíz del repo:  python -m src.cliente
 """
+import random
 import time
 from typing import Any, Callable
 
 import requests
 
-from src.consumir_gemini import MODELO, armar_peticion, extraer_texto
+from src.consumir_gemini import MODELO, armar_peticion, calcular_costo, extraer_texto
+
+# Precios por 1M de tokens (USD), plan pagado. Fuente: ai.google.dev/gemini-api/docs/pricing
+PRECIOS_POR_MILLON = {
+    "gemini-3.6-flash": {"entrada": 0.75, "salida": 3.75},
+    "gemini-3.5-flash-lite": {"entrada": 0.30, "salida": 2.50},
+}
+
+costo_total_sesion = 0.0
 
 
 def _detalle_error(respuesta: requests.Response) -> str:
@@ -43,18 +52,35 @@ def enviar_peticion(url: str, headers: dict, body: dict) -> dict:
         raise RuntimeError("La respuesta del servicio no llegó en formato JSON.")
 
 
-def con_reintento(funcion: Callable[[], Any], intentos: int = 3, espera_base: float = 2) -> Any:
-    """Ejecuta la función y, si lanza TimeoutError, la reintenta con espera creciente (2s, 4s...).
-    Cualquier otro error se propaga de inmediato, sin reintentar."""
+def con_reintento(funcion: Callable[[], Any], intentos: int = 3,
+                  espera_base: float = 2, espera_maxima: float = 30) -> Any:
+    """Ejecuta la función y, si lanza TimeoutError, la reintenta con backoff exponencial,
+    con tope (espera_maxima) y jitter. Cualquier otro error se propaga de inmediato."""
     for intento in range(1, intentos + 1):
         try:
             return funcion()
-        except TimeoutError:
+        except TimeoutError as error:
             if intento == intentos:
                 raise
-            espera = espera_base * (2 ** (intento - 1))
-            print(f"  Intento {intento} de {intentos} falló por error temporal. Reintentando en {espera}s...")
-            time.sleep(espera)
+            espera = min(espera_base * (2 ** (intento - 1)), espera_maxima)
+            espera_con_jitter = espera + random.uniform(0, espera * 0.1)
+            print(f"  Intento {intento} de {intentos} falló: {error} "
+                  f"Reintentando en {espera_con_jitter:.1f}s...")
+            time.sleep(espera_con_jitter)
+
+
+def registrar_costo(datos: dict, modelo: str = MODELO) -> float:
+    """Calcula el costo de una respuesta exitosa y lo suma al acumulado de la sesión."""
+    global costo_total_sesion
+    precios = PRECIOS_POR_MILLON.get(modelo)
+    if precios is None:
+        print(f"  (sin precio registrado para {modelo}; costo no calculado)")
+        return 0.0
+    costo = calcular_costo(datos, precios["entrada"], precios["salida"])
+    costo_total_sesion += costo
+    tokens = datos.get("usageMetadata", {}).get("totalTokenCount", 0)
+    print(f"  Operación: {tokens} tokens, costo ${costo:.6f} (acumulado sesión: ${costo_total_sesion:.6f})")
+    return costo
 
 
 def consultar_modelo(pregunta: str, system_instruction: str = None,
@@ -65,6 +91,7 @@ def consultar_modelo(pregunta: str, system_instruction: str = None,
         datos = con_reintento(lambda: enviar_peticion(url, headers, body))
     except TimeoutError:
         raise RuntimeError("El servicio no respondió tras varios intentos. Intenta más tarde.")
+    registrar_costo(datos, modelo)  # solo se registra si la respuesta llegó bien
     return extraer_texto(datos)
 
 
