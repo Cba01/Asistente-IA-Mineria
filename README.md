@@ -225,6 +225,7 @@ La aplicación nunca termina con un *Traceback*. Ante cualquier falla muestra un
 
 ---
 
+
 ## Registro del ensayo de instalación limpia
 
 - **Fecha:** 2026-10-22
@@ -233,3 +234,15 @@ La aplicación nunca termina con un *Traceback*. Ante cualquier falla muestra un
 - **Verificaciones adicionales:** una consulta vacía muestra un mensaje de error claro, sin Traceback; `git status` en la copia clonada confirma que `.env` y `venv/` están excluidos.
 - **Correcciones:** no fueron necesarias.
 - **Resultado:** la aplicación se instaló y ejecutó correctamente siguiendo solo este README.
+
+---
+
+## Pruebas unitarias
+
+El cliente modular (`src/cliente.py`) tiene una suite de 14 pruebas con `pytest`. Usan mocks, así que no llaman a la API real, no gastan cuota y no necesitan un `.env`.
+
+```bash
+python -m pytest -v
+```
+
+Cubren la clasificación de errores de `enviar_peticion` (400/401 → `ValueError`; 429, 503 y errores de red → `TimeoutError`), el reintento con backoff de `con_reintento`, el cálculo y acumulado de `registrar_costo`, y la interfaz pública `consultar_modelo`.
