@@ -69,13 +69,13 @@ Abre el archivo `.env` y pega tu API key:
 
 ```dotenv
 GEMINI_API_KEY=tu_llave_real
-GEMINI_MODEL=gemini-3.6-flash
+GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
 | Variable | Obligatoria | Descripción |
 |---|---|---|
 | `GEMINI_API_KEY` | Sí | API key de Google Gemini. |
-| `GEMINI_MODEL` | No | Modelo a usar. Si se deja vacía, se usa `gemini-3.6-flash`. |
+| `GEMINI_MODEL` | No | Modelo a usar. Si se deja vacía, se usa `gemini-3.5-flash-lite`. |
 
 El archivo `.env` está excluido en `.gitignore` y **nunca se sube al repositorio**.
 
@@ -175,7 +175,7 @@ El módulo `src/consumir_gemini.py` separa cada responsabilidad en su propia fun
 | `parsear_respuesta_json` | Convierte la respuesta en un diccionario y valida que tenga las claves esperadas. |
 | `calcular_costo` | Calcula el costo en USD, incluidos los tokens de "pensamiento" del modelo. |
 
-La elección del modelo (`gemini-3.6-flash` frente a `gemini-3.5-flash-lite`) está documentada en [`docs/decision_arquitectura.md`](docs/decision_arquitectura.md).
+La elección del modelo (`gemini-3.5-flash-lite` frente a `gemini-3.6-flash`) está documentada en [`docs/decision_arquitectura.md`](docs/decision_arquitectura.md).
 
 ---
 

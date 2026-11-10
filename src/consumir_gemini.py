@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ERRORES_TEMPORALES = (429, 500, 503)
-MODELO = os.getenv("GEMINI_MODEL") or "gemini-3.6-flash"
+MODELO = os.getenv("GEMINI_MODEL") or "gemini-3.5-flash-lite"
 URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 

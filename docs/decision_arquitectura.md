@@ -72,3 +72,16 @@ El costo extra se justifica: aunque cada petición cuesta bastante más, sigue s
 ## Alternativa descartada y por qué
 
 Descarté **gemini-3.5-flash-lite**. Es aproximadamente **24 veces más barato por petición** y responde en la **mitad de tiempo** (~1,7 s), porque no usa tokens de pensamiento. Sería la mejor opción para una aplicación de alto volumen donde la velocidad es lo principal. Además, fue más estable: no tuvo errores 503. Pero sus respuestas fueron más genéricas para el contexto minero, y en dos de seis respuestas apareció texto en otros alfabetos (chino y canarés). En un asistente de seguridad, la confiabilidad y el detalle pesan más que el ahorro, así que flash-lite no se ajusta a la prioridad de mi caso.
+
+## Revisión de la decisión (2026-11-10)
+
+**Nuevo modelo por defecto:** gemini-3.5-flash-lite
+
+**Motivo del cambio:**
+- La cuota gratuita de gemini-3.6-flash (20 peticiones/día, 5/minuto) no alcanza para el trabajo del Módulo 2: solo la evaluación de la U2.2 requiere 20 respuestas, más pruebas y desarrollo.
+- Desde el Módulo 2 el proyecto incorpora RAG: la precisión técnica vendrá de los documentos recuperados (procedimientos, DS 132) y no del conocimiento general del modelo. La ventaja de calidad de 3.6-flash pesa menos que la estabilidad, la cuota, la latencia y el costo.
+- flash-lite no tuvo errores 503 en las pruebas, responde en ~1,7 s y cuesta ~24 veces menos por petición.
+
+**Riesgo conocido y mitigación:** en la comparación, flash-lite mezcló caracteres de otros idiomas en 2 de 6 respuestas. Se mitiga con el prompt de sistema ("responde siempre en español") y se monitoreará en la evaluación de la U2.2.
+
+**Reversibilidad:** el modelo se configura con la variable `GEMINI_MODEL`, así que se puede volver a gemini-3.6-flash sin cambiar código.
