@@ -81,6 +81,7 @@ Descarté **gemini-3.5-flash-lite**. Es aproximadamente **24 veces más barato p
 - La cuota gratuita de gemini-3.6-flash (20 peticiones/día, 5/minuto) no alcanza para el trabajo del Módulo 2: solo la evaluación de la U2.2 requiere 20 respuestas, más pruebas y desarrollo.
 - Desde el Módulo 2 el proyecto incorpora RAG: la precisión técnica vendrá de los documentos recuperados (procedimientos, DS 132) y no del conocimiento general del modelo. La ventaja de calidad de 3.6-flash pesa menos que la estabilidad, la cuota, la latencia y el costo.
 - flash-lite no tuvo errores 503 en las pruebas, responde en ~1,7 s y cuesta ~24 veces menos por petición.
+- Cuota gratuita de gemini-3.5-flash-lite: 15 peticiones/minuto y 500/día (verificado en AI Studio el 2026-11-10), contra 5/minuto y 20/día de gemini-3.6-flash.
 
 **Riesgo conocido y mitigación:** en la comparación, flash-lite mezcló caracteres de otros idiomas en 2 de 6 respuestas. Se mitiga con el prompt de sistema ("responde siempre en español") y se monitoreará en la evaluación de la U2.2.
 

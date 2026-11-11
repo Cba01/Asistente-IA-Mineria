@@ -1,0 +1,222 @@
+[
+  {
+    "pregunta": "¿Desde qué altura se considera trabajo en altura?",
+    "referencia": "Se considera trabajo en altura desde 1,8 metros sobre el nivel inferior.",
+    "respuesta": "En Chile, según la normativa vigente (NCH 1258 y Guía Técnica ISP), el trabajo en altura física se considera a partir de **1,80 metros** sobre el nivel del suelo o plataforma de trabajo.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5833333333333334,
+    "coincidencia_procesada": 0.75,
+    "precision": 0.2727272727272727,
+    "cobertura": 0.75,
+    "f1": 0.39999999999999997
+  },
+  {
+    "pregunta": "¿Qué ley regula el seguro de accidentes del trabajo en Chile?",
+    "referencia": "El seguro de accidentes del trabajo y enfermedades profesionales está regulado por la Ley 16.744.",
+    "respuesta": "El seguro de accidentes del trabajo y enfermedades profesionales en Chile está regulado por la **Ley N° 16.744**. Su cumplimiento es obligatorio en todas las faenas mineras del país.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.8666666666666667,
+    "coincidencia_procesada": 1.0,
+    "precision": 0.5172413793103449,
+    "cobertura": 1.0,
+    "f1": 0.6818181818181819
+  },
+  {
+    "pregunta": "¿Cuál es el límite de exposición a ruido en una jornada de 8 horas?",
+    "referencia": "Según el DS 594, el límite de exposición a ruido es de 85 dB(A) para una jornada de 8 horas.",
+    "respuesta": "En Chile, el límite máximo permisible de exposición a ruido para una jornada de 8 horas es de 85 decibeles (dB(A)), según el Decreto Supremo N° 594 del MINSAL. Al alcanzar este nivel, es obligatorio implementar medidas de protección auditiva y control.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.7058823529411765,
+    "coincidencia_procesada": 0.9411764705882353,
+    "precision": 0.4523809523809524,
+    "cobertura": 0.95,
+    "f1": 0.6129032258064516
+  },
+  {
+    "pregunta": "¿Qué concentración de oxígeno debe haber para entrar a un espacio confinado?",
+    "referencia": "El oxígeno debe estar entre 19,5 % y 23,5 %; bajo ese rango hay deficiencia y sobre él hay riesgo por exceso de oxígeno.",
+    "respuesta": "La concentración de oxígeno debe ser estrictamente entre **19,5% y 22%** en volumen para ingresar a un espacio confinado, según la normativa chilena vigente.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.22727272727272727,
+    "coincidencia_procesada": 0.3157894736842105,
+    "precision": 0.25,
+    "cobertura": 0.2727272727272727,
+    "f1": 0.2608695652173913
+  },
+  {
+    "pregunta": "¿Cuántos representantes tiene un Comité Paritario de Higiene y Seguridad?",
+    "referencia": "El Comité Paritario tiene tres representantes de la empresa y tres de los trabajadores, y es obligatorio en empresas de más de 25 trabajadores.",
+    "respuesta": "El Comité Paritario de Higiene y Seguridad se compone de tres representantes de la empresa y tres representantes de los trabajadores. Ambos",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5789473684210527,
+    "coincidencia_procesada": 0.6111111111111112,
+    "precision": 0.7272727272727273,
+    "cobertura": 0.6666666666666666,
+    "f1": 0.6956521739130435
+  },
+  {
+    "pregunta": "¿Se puede usar el pull cord de una correa como bloqueo para intervenirla?",
+    "referencia": "No. El pull cord es un dispositivo de parada de emergencia, no de aislamiento; para intervenir hay que bloquear en el interruptor.",
+    "respuesta": "**No**, el *pull cord* (cable de parada de emergencia) es solo un dispositivo de detención temporal y **nunca** debe usarse como método de bloqueo. Para intervenir la correa se debe aplicar el bloqueo de energías peligrosas (LOTO) en el interruptor principal y verificar energía cero.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.4,
+    "coincidencia_procesada": 0.7777777777777778,
+    "precision": 0.37777777777777777,
+    "cobertura": 0.7727272727272727,
+    "f1": 0.5074626865671642
+  },
+  {
+    "pregunta": "¿Se puede usar un cinturón de seguridad para detener una caída?",
+    "referencia": "No. Para detener una caída se debe usar un arnés de cuerpo completo; el cinturón solo sirve para posicionamiento.",
+    "respuesta": "No, los cinturones de seguridad solo sirven para posicionamiento y sujeción, nunca para detener una caída libre. Para la detención de caídas es obligatorio usar un",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.47368421052631576,
+    "coincidencia_procesada": 0.5555555555555556,
+    "precision": 0.4230769230769231,
+    "cobertura": 0.5789473684210527,
+    "f1": 0.4888888888888889
+  },
+  {
+    "pregunta": "¿Se puede pasar bajo una carga suspendida durante un izaje?",
+    "referencia": "No. Nunca se debe pasar ni permanecer bajo una carga suspendida.",
+    "respuesta": "Nunca se debe pasar ni permanecer bajo una carga suspendida durante ninguna maniobra de izaje en la faena. Está estrictamente prohibido por normativa de seguridad minera para evitar accidentes fatales.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.8181818181818182,
+    "coincidencia_procesada": 0.9090909090909091,
+    "precision": 0.3333333333333333,
+    "cobertura": 0.9090909090909091,
+    "f1": 0.4878048780487804
+  },
+  {
+    "pregunta": "¿Basta con apagar un equipo desde la botonera para intervenirlo?",
+    "referencia": "No. Hay que aislar la energía en el interruptor, instalar candado y tarjeta, y verificar energía cero.",
+    "respuesta": "No, nunca basta; es obligatorio aplicar el bloqueo de energías peligrosas (Lockout/Tagout o LOTO) y verificar energía cero antes de intervenir.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.26666666666666666,
+    "coincidencia_procesada": 0.4,
+    "precision": 0.2857142857142857,
+    "cobertura": 0.35294117647058826,
+    "f1": 0.31578947368421056
+  },
+  {
+    "pregunta": "¿Qué es el bloqueo y etiquetado de energías?",
+    "referencia": "Es un procedimiento que aísla las fuentes de energía de un equipo con candado y tarjeta para evitar que se energice mientras se interviene.",
+    "respuesta": "Es un procedimiento de seguridad para aislar y bloquear todas las fuentes de energía peligrosa en equipos antes de intervenir en ellos. Su objetivo es evitar la energización accidental y proteger la vida de los trabajadores en faena.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5,
+    "coincidencia_procesada": 0.5,
+    "precision": 0.2894736842105263,
+    "cobertura": 0.4583333333333333,
+    "f1": 0.3548387096774194
+  },
+  {
+    "pregunta": "¿Qué es un AST?",
+    "referencia": "El AST, Análisis Seguro de Trabajo, identifica los peligros de una tarea y sus medidas de control antes de ejecutarla.",
+    "respuesta": "Un AST (Análisis de Seguridad en el Trabajo) es una herramienta preventiva para identificar peligros, evaluar riesgos y definir medidas de control antes de iniciar una tarea en la faena minera. Su correcta aplicación es obligatoria para proteger la integridad de los trabajadores.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.47058823529411764,
+    "coincidencia_procesada": 0.7647058823529411,
+    "precision": 0.37209302325581395,
+    "cobertura": 0.8,
+    "f1": 0.5079365079365079
+  },
+  {
+    "pregunta": "¿Qué es un PTS?",
+    "referencia": "El PTS, Procedimiento de Trabajo Seguro, describe paso a paso cómo realizar una tarea de forma segura.",
+    "respuesta": "Un PTS es un Procedimiento de Trabajo Seguro que establece el paso a paso para realizar una tarea minera sin riesgos. Su cumplimiento es obligatorio para proteger la vida de los trabajadores.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5333333333333333,
+    "coincidencia_procesada": 0.7333333333333333,
+    "precision": 0.40625,
+    "cobertura": 0.7647058823529411,
+    "f1": 0.5306122448979592
+  },
+  {
+    "pregunta": "¿Qué es el DS 132?",
+    "referencia": "El DS 132 es el Reglamento de Seguridad Minera de Chile.",
+    "respuesta": "El Decreto Supremo N° 132 es el Reglamento de Seguridad Minera en Chile, el cual establece las normas obligatorias para proteger la vida y salud de los trabajadores en las faenas. Su cumplimiento es fiscalizado por Sernageomin para prevenir accidentes y enfermedades profesionales.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.8,
+    "coincidencia_procesada": 0.8888888888888888,
+    "precision": 0.23255813953488372,
+    "cobertura": 0.9090909090909091,
+    "f1": 0.3703703703703703
+  },
+  {
+    "pregunta": "¿Qué enfermedad produce la exposición prolongada a polvo de sílice?",
+    "referencia": "La exposición prolongada a polvo de sílice produce silicosis.",
+    "respuesta": "La exposición prolongada al polvo de sílice produce silicose, una enfermedad pulmonar profesional irreversible y grave. Además, aumenta significativamente el riesgo de desarrollar cáncer al pulmón y tuberculosis.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.7777777777777778,
+    "coincidencia_procesada": 0.7777777777777778,
+    "precision": 0.25,
+    "cobertura": 0.7777777777777778,
+    "f1": 0.3783783783783784
+  },
+  {
+    "pregunta": "¿Qué es la energía residual en un equipo?",
+    "referencia": "Es la energía que queda acumulada en un equipo después de desconectarlo, como tensión mecánica, presión o gravedad.",
+    "respuesta": "La energía residual es la energía acumulada (eléctrica, hidráulica, mecánica o neumática) que permanece en un equipo tras haber sido apagado. Debe ser completamente disipada o bloqueada antes de realizar cualquier mantenimiento para evitar accidentes fatales.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5,
+    "coincidencia_procesada": 0.6111111111111112,
+    "precision": 0.3055555555555556,
+    "cobertura": 0.6111111111111112,
+    "f1": 0.40740740740740744
+  },
+  {
+    "pregunta": "¿Qué se debe hacer después de instalar el candado de bloqueo?",
+    "referencia": "Después de instalar el candado y la tarjeta hay que liberar o bloquear las energías residuales y verificar energía cero intentando arrancar el equipo.",
+    "respuesta": "Después de instalar el candado de bloqueo, se debe **verificar la energía cero** intentando accionar los controles para asegurar que el aislamiento fue efectivo. Finalmente, firma y registra la tarjeta de bloqueo en el sistema de la faena.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.5,
+    "coincidencia_procesada": 0.5909090909090909,
+    "precision": 0.3684210526315789,
+    "cobertura": 0.5833333333333334,
+    "f1": 0.4516129032258065
+  },
+  {
+    "pregunta": "¿Por qué cada trabajador debe usar su propio candado?",
+    "referencia": "Cada trabajador usa su propio candado para que el equipo no se pueda energizar hasta que todos hayan retirado el suyo.",
+    "respuesta": "El uso del candado personal garantiza el bloqueo exclusivo de la energía, evitando que otra persona reactive los equipos por error mientras estás realizando labores de mantenimiento. Esto es clave para asegurar el cumplimiento del estándar de aislamiento y bloqueo (LOTO) en faena.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.21052631578947367,
+    "coincidencia_procesada": 0.21052631578947367,
+    "precision": 0.11627906976744186,
+    "cobertura": 0.23809523809523808,
+    "f1": 0.15625
+  },
+  {
+    "pregunta": "¿Para qué sirve el barbiquejo del casco?",
+    "referencia": "El barbiquejo mantiene el casco firme en la cabeza para que no se caiga con un golpe, el viento o al agacharse.",
+    "respuesta": "El barbiquejo sirve para asegurar el casco a la cabeza y evitar que se caiga durante faenas o ante vientos fuertes. Es un elemento de protección personal obligatorio en la minería chilena.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.6190476190476191,
+    "coincidencia_procesada": 0.6,
+    "precision": 0.40625,
+    "cobertura": 0.5909090909090909,
+    "f1": 0.4814814814814815
+  },
+  {
+    "pregunta": "¿Qué se debe hacer antes de intervenir una correa inclinada?",
+    "referencia": "Antes de intervenir una correa inclinada hay que bloquear la energía y trabar mecánicamente la correa para que no se mueva por gravedad.",
+    "respuesta": "Antes de intervenir una correa inclinada, se debe aplicar el bloqueo y etiquetado (LOTO) de todas sus fuentes de energía y asegurar el sistema contra desplazamiento por gravedad mediante un traba-correas o freno mecánico.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.45,
+    "coincidencia_procesada": 0.55,
+    "precision": 0.3235294117647059,
+    "cobertura": 0.4782608695652174,
+    "f1": 0.3859649122807018
+  },
+  {
+    "pregunta": "¿Por qué hay que delimitar el área de trabajo?",
+    "referencia": "Hay que delimitar el área para impedir que personas ajenas ingresen a la zona de riesgo.",
+    "respuesta": "Se debe delimitar el área de trabajo para prevenir el ingreso de personal no autorizado y controlar los riesgos operacionales específicos de la faena. Esto evita accidentes graves por caídas, atropellos o contacto con maquinaria en movimiento.",
+    "modelo": "gemini-3.5-flash-lite",
+    "coincidencia_cruda": 0.4,
+    "coincidencia_procesada": 0.4,
+    "precision": 0.16216216216216217,
+    "cobertura": 0.375,
+    "f1": 0.22641509433962265
+  }
+]
