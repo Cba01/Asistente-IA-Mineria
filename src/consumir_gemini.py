@@ -69,11 +69,15 @@ def enviar_peticion(url, headers, body, intentos=3):
 
 
 def extraer_texto(datos):
-    """Saca el texto generado de la respuesta de Gemini."""
+    """Saca el texto generado de la respuesta de Gemini, uniendo todas sus partes."""
     try:
-        return datos["candidates"][0]["content"]["parts"][0]["text"]
+        partes = datos["candidates"][0]["content"]["parts"]
     except (KeyError, IndexError):
         raise RuntimeError("La respuesta no trae el texto generado en el lugar esperado.")
+    texto = "".join(parte.get("text", "") for parte in partes if not parte.get("thought"))
+    if not texto:
+        raise RuntimeError("La respuesta no trae texto generado.")
+    return texto
 
 
 def parsear_respuesta_json(texto, claves_esperadas):
