@@ -28,6 +28,7 @@ PLANTILLA_RECOMENDACIONES = PromptTemplate.from_template(
 PLANTILLA_FORMATO = PromptTemplate.from_template(
     "Convierte estas medidas en un checklist de máximo 5 puntos numerados, en texto plano "
     "(sin markdown, sin ** ni #), para que un trabajador lo revise antes de empezar. "
+    "Escribe en español correcto, con tildes. "
     "Termina con esta frase: 'Esta orientación no reemplaza el PTS de la faena ni las instrucciones "
     "del supervisor.'\n\n{recomendaciones}"
 )
