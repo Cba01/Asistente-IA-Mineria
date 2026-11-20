@@ -6,7 +6,11 @@ Los datos de equipos, trabajadores y procedimientos son FICTICIOS, solo para el 
 
 Uso desde la raíz del repo:  python -m src.agente
 """
-from datetime import date
+
+import json
+import threading
+from datetime import date, datetime, timezone
+from pathlib import Path
 
 from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.chat_history import InMemoryChatMessageHistory
@@ -122,13 +126,80 @@ def buscar_procedimiento(tarea: str, incluir_pasos: bool = False) -> str:
     for codigo, pts in encontrados:
         texto_pts = f"{codigo}: {pts['nombre']}"
         if incluir_pasos:
-            pasos = " ".join(f"{i}. {paso}." for i, paso in enumerate(pts["pasos"], start=1))
+            pasos = " ".join(f"{i}. {paso}." for i,
+                             paso in enumerate(pts["pasos"], start=1))
             texto_pts += f". Pasos: {pasos}"
         respuestas.append(texto_pts)
     return " | ".join(respuestas)
 
 
-HERRAMIENTAS = [consultar_estado_equipo, consultar_certificaciones_trabajador, buscar_procedimiento]
+# ---------- Supervisión humana (herramientas de riesgo alto) ----------
+
+ARCHIVO_APROBACIONES = Path("aprobaciones_agente.jsonl")
+ARCHIVO_TRAZAS = Path("trazas_agente.jsonl")
+HERRAMIENTAS_ALTO_RIESGO = {"solicitar_bloqueo_equipo"}
+
+
+def esperar_aprobacion(mensaje: str, tiempo_limite_segundos: float = 60) -> bool:
+    """Pide aprobación por consola con un tiempo límite. Funciona en Windows (usa un hilo, no select).
+    Si no hay respuesta a tiempo o no hay consola disponible, RECHAZA por seguridad."""
+    respuesta = []
+
+    def leer():
+        try:
+            respuesta.append(input(mensaje))
+        except EOFError:
+            pass
+
+    hilo = threading.Thread(target=leer, daemon=True)
+    hilo.start()
+    hilo.join(tiempo_limite_segundos)
+    if not respuesta:
+        print("\n(Sin respuesta a tiempo: la acción se rechaza por seguridad.)")
+        return False
+    return respuesta[0].strip().lower() == "s"
+
+
+def registrar_aprobacion(herramienta: str, argumentos: dict, aprobado: bool, archivo: Path = None) -> None:
+    """Guarda cada decisión de aprobación (aprobada o rechazada) en un archivo JSONL."""
+    archivo = archivo or ARCHIVO_APROBACIONES
+    registro = {"momento": datetime.now(timezone.utc).isoformat(), "herramienta": herramienta,
+                "argumentos": argumentos, "aprobado": aprobado}
+    with open(archivo, "a", encoding="utf-8") as f:
+        f.write(json.dumps(registro, ensure_ascii=False) + "\n")
+
+
+class ArgumentosSolicitarBloqueo(BaseModel):
+    codigo_equipo: str = Field(
+        description="Código del equipo a detener y bloquear, por ejemplo 'CT-01'.")
+    motivo: str = Field(
+        description="Motivo de la detención, por ejemplo 'polín dañado' o 'cambio de rodillo'.")
+
+
+@tool("solicitar_bloqueo_equipo", args_schema=ArgumentosSolicitarBloqueo)
+def solicitar_bloqueo_equipo(codigo_equipo: str, motivo: str) -> str:
+    """Genera una solicitud para detener y bloquear un equipo de la faena. Acción de RIESGO ALTO:
+    detiene la producción y requiere la aprobación de un supervisor antes de ejecutarse.
+    Usar cuando el trabajador pide explícitamente detener o bloquear un equipo."""
+    codigo = codigo_equipo.strip().upper()
+    equipo = EQUIPOS.get(codigo)
+    if equipo is None:
+        return f"No existe un equipo con el código {codigo}. No se generó ninguna solicitud."
+    if equipo["bloqueado"]:
+        return f"{codigo} ya está bloqueado. No se requiere una nueva solicitud."
+    mensaje = (f"\n[APROBACIÓN REQUERIDA] El agente quiere detener y bloquear {codigo} "
+               f"por: {motivo}. ¿Aprobar? (s/n): ")
+    aprobado = esperar_aprobacion(mensaje)
+    registrar_aprobacion("solicitar_bloqueo_equipo", {
+                         "codigo_equipo": codigo, "motivo": motivo}, aprobado)
+    if not aprobado:
+        return f"Solicitud de bloqueo de {codigo} NO aprobada por el supervisor. El equipo sigue operando."
+    return (f"Solicitud de bloqueo de {codigo} aprobada por el supervisor y registrada. "
+            f"Coordinar la detención con la sala de control antes de intervenir.")
+
+
+HERRAMIENTAS = [consultar_estado_equipo, consultar_certificaciones_trabajador,
+                buscar_procedimiento, solicitar_bloqueo_equipo]
 
 PROMPT_AGENTE = ChatPromptTemplate.from_messages([
     ("system",
@@ -193,7 +264,8 @@ def cerrar_sesion(session_id: str) -> None:
 def construir_agente_con_memoria(modelo, herramientas=HERRAMIENTAS):
     """Envuelve el agente con memoria por sesión. Cada invoke necesita
     config={'configurable': {'session_id': '...'}}."""
-    ejecutor = construir_agente(modelo, herramientas) | RunnableLambda(normalizar_resultado)
+    ejecutor = construir_agente(
+        modelo, herramientas) | RunnableLambda(normalizar_resultado)
     return RunnableWithMessageHistory(
         ejecutor,
         obtener_historial,
@@ -207,17 +279,77 @@ def config_sesion(session_id: str) -> dict:
     return {"configurable": {"session_id": session_id}}
 
 
+# ---------- Trazas de decisión ----------
+
+def registrar_traza(session_id: str, entrada: str, resultado: dict, archivo: Path = None) -> None:
+    """Guarda una interacción del agente como una línea JSON: qué se preguntó,
+    qué herramientas usó, con qué argumentos, qué observó y qué respondió."""
+    archivo = archivo or ARCHIVO_TRAZAS
+    registro = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "session_id": session_id,
+        "entrada": entrada,
+        "acciones": [{"herramienta": accion.tool, "argumentos": accion.tool_input,
+                      "observacion": str(observacion)}
+                     for accion, observacion in resultado.get("intermediate_steps", [])],
+        "respuesta_final": texto_de_salida(resultado.get("output", "")),
+    }
+    with open(archivo, "a", encoding="utf-8") as f:
+        f.write(json.dumps(registro, ensure_ascii=False) + "\n")
+
+
+def leer_trazas(archivo: Path = None) -> list[dict]:
+    archivo = archivo or ARCHIVO_TRAZAS
+    if not Path(archivo).exists():
+        return []
+    with open(archivo, encoding="utf-8") as f:
+        return [json.loads(linea) for linea in f if linea.strip()]
+
+
+def marcar_repeticiones_sospechosas(archivo: Path = None) -> list[str]:
+    """Primera revisión automática: sesiones donde la misma herramienta se usó dos veces seguidas.
+    Son candidatas a revisar a mano, no una conclusión."""
+    alertas = []
+    for registro in leer_trazas(archivo):
+        herramientas = [a["herramienta"] for a in registro.get("acciones", [])]
+        for anterior, actual in zip(herramientas, herramientas[1:]):
+            if anterior == actual:
+                alertas.append(
+                    f"Revisar: {registro['session_id']} usó '{actual}' dos veces seguidas")
+                break
+    return alertas
+
+
+def marcar_alto_riesgo_sin_decision(archivo: Path = None) -> list[str]:
+    """Alerta si una herramienta de riesgo alto aparece en la traza sin una decisión de aprobación."""
+    alertas = []
+    for registro in leer_trazas(archivo):
+        for accion in registro.get("acciones", []):
+            if (accion["herramienta"] in HERRAMIENTAS_ALTO_RIESGO
+                    and "aprobada" not in accion["observacion"].lower()):
+                alertas.append(f"Revisar: {registro['session_id']} usó '{accion['herramienta']}' "
+                               f"sin una decisión de aprobación registrada")
+    return alertas
+
+
 if __name__ == "__main__":
     agente = construir_agente_con_memoria(crear_modelo())
 
     conversacion = [
         ("turno_A", "¿Puedo intervenir hoy la correa CT-01?"),
         ("turno_A", "¿Qué procedimiento debo seguir para cambiarle un rodillo? Dame los pasos."),
-        ("turno_B", "¿De qué equipo te pregunté antes?"),
+        ("turno_A", "Vi un polín dañado en la CT-01. Solicita detenerla y bloquearla."),
+        ("turno_B", "¿El trabajador T-2045 puede trabajar en altura?"),
     ]
     for session_id, entrada in conversacion:
-        resultado = agente.invoke({"entrada": entrada}, config=config_sesion(session_id))
+        resultado = agente.invoke(
+            {"entrada": entrada}, config=config_sesion(session_id))
+        registrar_traza(session_id, entrada, resultado)
         print(f"\n=== [{session_id}] {entrada}")
-        print(f"Herramientas usadas: {herramientas_usadas(resultado) or 'ninguna'}")
+        print(
+            f"Herramientas usadas: {herramientas_usadas(resultado) or 'ninguna'}")
         print(resultado["output"])
-        print(f"(mensajes en el historial de {session_id}: {len(obtener_historial(session_id).messages)})")
+
+    print("\n--- Revisión automática de trazas ---")
+    alertas = marcar_repeticiones_sospechosas() + marcar_alto_riesgo_sin_decision()
+    print("\n".join(alertas) if alertas else "Sin alertas.")
