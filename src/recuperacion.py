@@ -17,10 +17,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Provisional: con K=4 entran las dos partes de una lista de pasos larga
-# (por ejemplo, PTS-GEN-002 "Pasos del bloqueo") más otros dos chunks.
-# Se valida con la métrica de recuperación del Bloque 27.
-K = 4
+# Elegido con la evaluación del Bloque 27 (docs/resultados_evaluacion.txt):
+# con k=3, 4 y 5 el recall es el mismo (0.964), así que k=3 da el mejor F1
+# y envía menos contexto al modelo en cada consulta.
+K = 3
 
 SIN_INFORMACION = "Los documentos disponibles no tienen información suficiente para responder esta pregunta."
 ADVERTENCIA = ("Recuerda que esta orientación no reemplaza el procedimiento oficial "

@@ -26,3 +26,18 @@ Con el splitter aplicado al documento completo, incluso agregando `"\n## "` como
 ## Cuándo reindexar
 
 Hay que volver a correr `python -m src.indexar_corpus` si se agrega, edita o elimina un documento, si cambia `chunk_size` o la estrategia de chunking, o si cambia el modelo de embeddings. El script borra la colección y la reconstruye completa, así que no quedan chunks viejos ni duplicados.
+
+## Elección de k (Bloque 27)
+
+Evaluación con 15 preguntas etiquetadas a mano antes de correr el retriever (`python -m src.evaluacion_recuperacion`, 2026-11-20). Dos corridas seguidas dieron los mismos números.
+
+| k | Precisión | Recall | F1 |
+|---|---|---|---|
+| **3** | **0.333** | **0.964** | **0.495** |
+| 4 | 0.250 | 0.964 | 0.397 |
+| 5 | 0.200 | 0.964 | 0.331 |
+
+- 13 de las 14 preguntas con respuesta recuperaron todos sus chunks relevantes.
+- La única falla parcial: "¿Cómo compruebo que el equipo quedó realmente sin energía?" trajo el paso de verificar energía cero del PTS-GEN-002, pero no el del PTS-MEC-014, que habla específicamente de una correa. La etiqueta no se cambió después de ver el resultado.
+- La precisión es baja por construcción: casi todas las preguntas tienen un solo chunk relevante, así que el máximo posible con k=3 es 0.33.
+- Subir k no agregó ningún chunk relevante, solo ruido. Se eligió **k=3**: mismo recall, mejor F1 y menos tokens de entrada por consulta.

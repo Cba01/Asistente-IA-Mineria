@@ -1,0 +1,84 @@
+Fecha: 2026-11-20 00:18
+Configuracion: k=4, chunk_size=500, chunk_overlap=80, casos=15
+
+prec  recall  pregunta
+0.25  1.00    ¿A partir de qué altura se considera trabajo en altura?
+0.25  1.00    ¿Por qué cada trabajador tiene que poner su propio candado?
+0.50  1.00    ¿Sirve tirar el pull cord para dejar la correa bloqueada?
+0.25  1.00    Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?
+0.25  0.50    ¿Cómo compruebo que el equipo quedó realmente sin energía?
+            recuperados: pts_gen_002_bloqueo_4, pts_gen_002_bloqueo_3, pts_gen_002_bloqueo_6, pts_gen_002_bloqueo_0
+0.25  1.00    ¿Qué peligros tiene cambiar un rodillo de la correa?
+0.25  1.00    ¿Qué tengo que revisar en el arnés antes de ponérmelo?
+0.25  1.00    ¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?
+0.25  1.00    ¿Cuántas personas forman el comité paritario?
+0.25  1.00    Si me accidento camino al trabajo, ¿me cubre el seguro?
+0.25  1.00    ¿La empresa me puede cobrar los zapatos de seguridad?
+0.25  1.00    ¿Qué enfermedad puede dar respirar polvo de sílice?
+0.25  1.00    ¿Qué institución fiscaliza la seguridad en las minas?
+0.25  1.00    ¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?
+0.00   n/a    ¿Cuántos días de vacaciones le corresponden a un trabajador minero?
+
+k   precision  recall  f1
+3   0.333      0.964   0.495
+4   0.250      0.964   0.397
+5   0.200      0.964   0.331
+
+============================================================
+
+Fecha: 2026-11-20 00:20
+Configuracion: k=4, chunk_size=500, chunk_overlap=80, casos=15
+
+prec  recall  pregunta
+0.25  1.00    ¿A partir de qué altura se considera trabajo en altura?
+0.25  1.00    ¿Por qué cada trabajador tiene que poner su propio candado?
+0.50  1.00    ¿Sirve tirar el pull cord para dejar la correa bloqueada?
+0.25  1.00    Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?
+0.25  0.50    ¿Cómo compruebo que el equipo quedó realmente sin energía?
+            recuperados: pts_gen_002_bloqueo_4, pts_gen_002_bloqueo_3, pts_gen_002_bloqueo_6, pts_gen_002_bloqueo_0
+0.25  1.00    ¿Qué peligros tiene cambiar un rodillo de la correa?
+0.25  1.00    ¿Qué tengo que revisar en el arnés antes de ponérmelo?
+0.25  1.00    ¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?
+0.25  1.00    ¿Cuántas personas forman el comité paritario?
+0.25  1.00    Si me accidento camino al trabajo, ¿me cubre el seguro?
+0.25  1.00    ¿La empresa me puede cobrar los zapatos de seguridad?
+0.25  1.00    ¿Qué enfermedad puede dar respirar polvo de sílice?
+0.25  1.00    ¿Qué institución fiscaliza la seguridad en las minas?
+0.25  1.00    ¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?
+0.00   n/a    ¿Cuántos días de vacaciones le corresponden a un trabajador minero?
+
+k   precision  recall  f1
+3   0.333      0.964   0.495
+4   0.250      0.964   0.397
+5   0.200      0.964   0.331
+
+============================================================
+
+Fecha: 2026-11-20 00:26
+Configuracion: k=3, chunk_size=500, chunk_overlap=80, casos=15
+
+prec  recall  pregunta
+0.33  1.00    ¿A partir de qué altura se considera trabajo en altura?
+0.33  1.00    ¿Por qué cada trabajador tiene que poner su propio candado?
+0.67  1.00    ¿Sirve tirar el pull cord para dejar la correa bloqueada?
+0.33  1.00    Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?
+0.33  0.50    ¿Cómo compruebo que el equipo quedó realmente sin energía?
+            recuperados: pts_gen_002_bloqueo_4, pts_gen_002_bloqueo_3, pts_gen_002_bloqueo_6
+0.33  1.00    ¿Qué peligros tiene cambiar un rodillo de la correa?
+0.33  1.00    ¿Qué tengo que revisar en el arnés antes de ponérmelo?
+0.33  1.00    ¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?
+0.33  1.00    ¿Cuántas personas forman el comité paritario?
+0.33  1.00    Si me accidento camino al trabajo, ¿me cubre el seguro?
+0.33  1.00    ¿La empresa me puede cobrar los zapatos de seguridad?
+0.33  1.00    ¿Qué enfermedad puede dar respirar polvo de sílice?
+0.33  1.00    ¿Qué institución fiscaliza la seguridad en las minas?
+0.33  1.00    ¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?
+0.00   n/a    ¿Cuántos días de vacaciones le corresponden a un trabajador minero?
+
+k   precision  recall  f1
+3   0.333      0.964   0.495
+4   0.250      0.964   0.397
+5   0.200      0.964   0.331
+
+============================================================
+
