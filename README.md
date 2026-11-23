@@ -159,7 +159,7 @@ Cada consulta hace **2 llamadas a la API**: una de embeddings y una de generaci�
 ### Ejecutar las pruebas
 
 ```bash
-python -m pytest                     # todas (135), sin llamar a la API
+python -m pytest                     # todas (141), sin llamar a la API
 python -m pytest tests/test_gate2.py -v   # los 4 criterios no compensables del Gate 2
 ```
 
@@ -204,7 +204,7 @@ Historial real del prompt:
 
 ### Otro punto de supervisión
 
-El agente de la U2.4 (`src/agente.py`) pide aprobación de un supervisor antes de solicitar el bloqueo de un equipo. Si nadie responde en 60 segundos, la solicitud se rechaza.
+El agente de la U2.4 (`src/agente.py`) pide aprobación de un supervisor antes de solicitar el bloqueo de un equipo. Si nadie responde en 60 segundos, la solicitud se rechaza. Además, el agente nunca autoriza una intervención: informa el estado y, si una respuesta suena a autorización, el código agrega la aclaración.
 
 ---
 
@@ -255,7 +255,7 @@ Asistente-IA-Mineria/
 │   ├── evaluacion_recuperacion.py, registro_rag.py, matriz_riesgos.py, decision.py, ...
 │   ├── agente.py               # Agente con herramientas y memoria (U2.4)
 │   └── cliente.py, consumir_gemini.py, ...   # Cliente de la API (Módulo 1 y U2.1)
-├── tests/                      # 135 pruebas con pytest (sin API)
+├── tests/                      # 141 pruebas con pytest (sin API)
 ├── docs/                       # Decisiones, evaluaciones y matriz de riesgos
 ├── main.py                     # Miniaplicación del Gate 1
 └── requirements.txt
@@ -281,7 +281,7 @@ Asistente-IA-Mineria/
 
 - El corpus no cubre 6 de 20 preguntas de prueba del Módulo 2 (AST, PTS, barbiquejo, cinturón frente a arnés, izaje, correas inclinadas): faltan 4 documentos.
 - El filtro de inyección reconoce frases conocidas; una instrucción reescrita con otras palabras puede pasar. Por eso hay otras dos capas.
-- El agente de la U2.4 puede responder "puedes intervenirlo" mirando solo el estado del equipo (riesgo CRÍTICO de la matriz, mitigación pendiente).
+- El agente de la U2.4 llegó a responder "puedes intervenirlo" mirando solo el estado del equipo. Está mitigado con el prompt y una revisión en código (`revisar_autorizacion`), pero un modelo podría autorizar con una frase que los patrones no reconocen: la autorización real siempre la da el supervisor.
 - La memoria del agente usa clases marcadas como obsoletas en LangChain 2.0 (migrar a LangGraph).
 - La aprobación del grafo usa `InMemorySaver`: una aprobación pendiente no sobrevive a un reinicio.
 

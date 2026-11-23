@@ -68,6 +68,14 @@ PROCEDIMIENTOS = {
 }
 
 
+DIAS_AVISO_VENCIMIENTO = 30
+
+
+def dias_para_vencer(fecha_vencimiento: str, hoy: date = None) -> int:
+    hoy = hoy or date.today()
+    return (date.fromisoformat(fecha_vencimiento) - hoy).days
+
+
 def estado_vigencia(fecha_vencimiento: str, hoy: date = None) -> str:
     """Devuelve 'vigente' o 'vencido' comparando la fecha con hoy (o con la fecha indicada)."""
     hoy = hoy or date.today()
@@ -102,7 +110,13 @@ def consultar_certificaciones_trabajador(codigo_trabajador: str) -> str:
         return f"No existe un trabajador con el código {codigo} en el registro."
     detalle = "; ".join(f"{curso}: {estado_vigencia(fecha)} (vence {fecha})"
                         for curso, fecha in cursos.items())
-    return f"Certificaciones de {codigo}: {detalle}."
+    # Aviso de vencimiento próximo (hallazgo de la U2.4: el curso de altura de T-2045
+    # vencía en 12 días y el agente no lo mencionó).
+    por_vencer = [f"{curso} vence en {dias_para_vencer(fecha)} días"
+                  for curso, fecha in cursos.items()
+                  if 0 <= dias_para_vencer(fecha) <= DIAS_AVISO_VENCIMIENTO]
+    aviso = f" ATENCIÓN: {'; '.join(por_vencer)}, coordinar la renovación." if por_vencer else ""
+    return f"Certificaciones de {codigo}: {detalle}.{aviso}"
 
 
 class ArgumentosBuscarProcedimiento(BaseModel):
@@ -206,8 +220,11 @@ PROMPT_AGENTE = ChatPromptTemplate.from_messages([
      "Eres un asistente de seguridad para una faena minera en Chile. Responde siempre en español, "
      "de forma breve y en texto plano, sin markdown. Usa las herramientas cuando la pregunta requiera "
      "datos de un equipo, de un trabajador o de un procedimiento. Nunca inventes datos que no te haya "
-     "devuelto una herramienta. Si un equipo tiene la mantención vencida o un curso está vencido, "
-     "adviértelo claramente."),
+     "devuelto una herramienta. Si un equipo tiene la mantención vencida o un curso está vencido o "
+     "por vencer, adviértelo claramente. Nunca le digas al trabajador que puede intervenir un equipo "
+     "o que está autorizado para una tarea: informa el estado del equipo o de sus cursos y recuerda "
+     "que la autorización la da el supervisor con el permiso de trabajo, el AST y, cuando "
+     "corresponde, el bloqueo de energías."),
     MessagesPlaceholder("chat_history", optional=True),
     ("human", "{entrada}"),
     MessagesPlaceholder("agent_scratchpad"),
@@ -239,9 +256,34 @@ def texto_de_salida(salida) -> str:
     return str(salida)
 
 
+# Segunda capa contra el riesgo CRÍTICO de la matriz: aunque el prompt lo prohíbe, si la
+# respuesta igual "autoriza" una intervención, se agrega la aclaración en código.
+PATRONES_AUTORIZACION = [
+    r"\bpuedes?\s+(?:intervenir|realizar|hacer|cambiar|trabajar|subir|ingresar)",
+    r"\best[áa]s?\s+(?:autorizad|habilitad)",
+    r"\btienes?\s+autorizaci[óo]n",
+    r"\bpuede\s+(?:intervenir|realizar|trabajar|subir|ingresar)",
+]
+ACLARACION_AUTORIZACION = ("Importante: esta información no es una autorización. La autorización para "
+                           "intervenir la da el supervisor con el permiso de trabajo, el AST y, "
+                           "cuando corresponde, el bloqueo de energías.")
+
+
+def revisar_autorizacion(texto: str) -> tuple[str, bool]:
+    """Si la respuesta suena a autorización, agrega la aclaración. Devuelve (texto, se_agregó)."""
+    import re
+    if ACLARACION_AUTORIZACION in texto:
+        return texto, False
+    if any(re.search(p, texto.lower()) for p in PATRONES_AUTORIZACION):
+        return f"{texto.rstrip()}\n\n{ACLARACION_AUTORIZACION}", True
+    return texto, False
+
+
 def normalizar_resultado(resultado: dict) -> dict:
-    """Deja 'output' como texto plano, para que la memoria guarde un mensaje limpio."""
-    return {**resultado, "output": texto_de_salida(resultado["output"])}
+    """Deja 'output' como texto plano (para que la memoria guarde un mensaje limpio)
+    y agrega la aclaración si la respuesta suena a una autorización."""
+    texto, corregido = revisar_autorizacion(texto_de_salida(resultado["output"]))
+    return {**resultado, "output": texto, "aclaracion_agregada": corregido}
 
 
 # ---------- Memoria ----------
@@ -293,6 +335,7 @@ def registrar_traza(session_id: str, entrada: str, resultado: dict, archivo: Pat
                       "observacion": str(observacion)}
                      for accion, observacion in resultado.get("intermediate_steps", [])],
         "respuesta_final": texto_de_salida(resultado.get("output", "")),
+        "aclaracion_agregada": resultado.get("aclaracion_agregada", False),
     }
     with open(archivo, "a", encoding="utf-8") as f:
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")

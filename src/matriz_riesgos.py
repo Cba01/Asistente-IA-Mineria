@@ -16,10 +16,12 @@ ARCHIVO_MATRIZ = RAIZ / "docs" / "matriz_riesgos.md"
 RIESGOS = [
     {"riesgo": "El agente autoriza una intervención ('puedes intervenirlo') mirando solo el estado "
                "del equipo, sin permiso de trabajo, AST ni certificaciones",
-     "probabilidad": 4, "impacto": 5,
-     "evidencia": "Ocurrió en la corrida real del agente del 2026-11-19 (U2.4)",
-     "mitigacion": "Ninguna en código todavía: hallazgo documentado en docs/limites_autonomia_agente.md "
-                   "(U2.4). Pendiente: prompt que informe el estado sin autorizar",
+     "probabilidad": 2, "impacto": 5,
+     "evidencia": "Ocurrió en la corrida real del 2026-11-19 (U2.4). Tras la corrección, la corrida del "
+                  "2026-11-23 no autorizó en ninguna de las 4 consultas",
+     "mitigacion": "Prompt del agente que informa sin autorizar + revisión en código que agrega la "
+                   "aclaración si la respuesta suena a autorización (revisar_autorizacion en src/agente.py, "
+                   "Gate 2)",
      "supervision": "La autorización para intervenir siempre la da el supervisor con el permiso de "
                     "trabajo; el asistente solo informa. Revisión diaria de trazas con 'puedes' en la respuesta"},
     {"riesgo": "Respuesta con un dato de seguridad incorrecto (cifra, límite o paso omitido) que el "

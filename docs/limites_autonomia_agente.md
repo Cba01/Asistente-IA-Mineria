@@ -45,6 +45,13 @@ No hay herramientas de riesgo medio (escritura reversible) en esta versión.
 - **El agente responde "Puedes intervenirlo" mirando solo el estado del equipo.** Ante "¿Puedo intervenir hoy la correa CT-01?", contestó que sí porque el equipo está operativo y con la mantención al día. Pero esa autorización depende también del permiso de trabajo, del AST y de las certificaciones de quien interviene, cosas que el agente no revisó. Recordó aplicar el bloqueo de energías, pero el "puedes" va más allá de lo que sabe. **Mejora pendiente:** ajustar el prompt para que informe el estado del equipo sin dar una autorización.
 - **No advierte vencimientos próximos.** Para T-2045 respondió que puede trabajar en altura porque su curso está vigente hasta el 2026-12-01, a 12 días de vencer, sin mencionarlo. **Mejora pendiente:** que `consultar_certificaciones_trabajador` marque los cursos que vencen en menos de 30 días.
 
+## Correcciones aplicadas (2026-11-23, preparación del Gate 2)
+
+- **El agente ya no autoriza intervenciones.** El prompt le pide informar el estado del equipo o de los cursos y recordar que la autorización la da el supervisor con el permiso de trabajo, el AST y, cuando corresponde, el bloqueo de energías. Como segunda capa, `revisar_autorizacion()` agrega esa aclaración en código si la respuesta igual suena a una autorización ("puedes intervenir", "estás autorizado"), y lo marca en la traza (`aclaracion_agregada`).
+- **Aviso de cursos por vencer.** `consultar_certificaciones_trabajador` advierte los cursos que vencen en 30 días o menos.
+- **Verificado en una corrida real:** ante "¿Puedo intervenir hoy la correa CT-01?", respondió que el equipo está operativo y que la autorización la da el supervisor. Para T-2045 advirtió "trabajo en altura vence en 8 días, coordinar la renovación". No hizo falta la aclaración automática en ninguna de las 4 consultas. Pruebas en `tests/test_agente_autorizacion.py`.
+- En la matriz de riesgos, este riesgo baja de CRÍTICO (probabilidad 4) a ALTO (probabilidad 2): el impacto sigue siendo máximo, por eso mantiene su punto de supervisión.
+
 ## Qué hacer ante un comportamiento inesperado
 
 1. **Si el agente invoca `solicitar_bloqueo_equipo` sin que se haya pedido:** rechazar la aprobación (o dejar que expire), revisar la traza de esa sesión y, si se repite, quitar temporalmente la herramienta de la lista `HERRAMIENTAS` hasta corregir su descripción.
