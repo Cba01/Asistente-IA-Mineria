@@ -136,6 +136,10 @@ SISTEMA_RAG = (
 
 PLANTILLA_USUARIO = "<contexto>\n{contexto}\n</contexto>\n\nPregunta: {pregunta}"
 
+# Misma huella que src/registro_prompts.py calcula para esta versión: así una huella vista
+# en el log se puede buscar en prompts/registro_versiones.json.
+PROMPT_HUELLA = hashlib.sha256((SISTEMA_RAG + "\n\n" + PLANTILLA_USUARIO).encode("utf-8")).hexdigest()[:12]
+
 
 def construir_mensajes(pregunta: str, chunks) -> tuple[list, dict]:
     contexto, citas = formatear_contexto(chunks)
@@ -161,7 +165,7 @@ def procesar_consulta(pregunta: str, retriever=None, modelo=None, k: int = K) ->
     token = trace_id_var.set("trace-" + uuid.uuid4().hex[:8])
     try:
         log_evento("consulta_recibida", pregunta_len=len(pregunta), pregunta_huella=huella(pregunta),
-                   prompt_sistema_huella=huella(SISTEMA_RAG))
+                   prompt_huella=PROMPT_HUELLA)
 
         if retriever is None:
             from src.recuperacion import crear_retriever
@@ -179,7 +183,8 @@ def procesar_consulta(pregunta: str, retriever=None, modelo=None, k: int = K) ->
             respuesta = f"{SIN_INFORMACION} {ADVERTENCIA}"
             log_evento("respuesta_sin_llamar_al_modelo", motivo="no quedó contexto confiable")
             return {"trace_id": trace_id_var.get(), "respuesta": respuesta,
-                    "descartados": [c.id for c, _ in descartados], "citas_usadas": {}}
+                    "descartados": [c.id for c, _ in descartados], "citas_usadas": {},
+                    "fuentes_contexto": [], "sin_informacion": True}
 
         if modelo is None:
             from src.cadena_tres_pasos import crear_modelo
@@ -192,14 +197,19 @@ def procesar_consulta(pregunta: str, retriever=None, modelo=None, k: int = K) ->
 
         respuesta = texto_de_salida(salida.content)
         validas, invalidas = extraer_citas(respuesta, citas)
-        log_evento("respuesta_generada", nivel=logging.WARNING if invalidas else logging.INFO,
+        sin_informacion = SIN_INFORMACION in respuesta
+        sin_citas = not validas and not sin_informacion
+        log_evento("respuesta_generada",
+                   nivel=logging.WARNING if (invalidas or sin_citas) else logging.INFO,
                    respuesta_len=len(respuesta), ms=ms_generacion,
                    fuentes_citadas=sorted(set(validas.values())), citas_invalidas=invalidas,
-                   sin_informacion=SIN_INFORMACION in respuesta)
+                   sin_citas=sin_citas, sin_informacion=sin_informacion)
         return {"trace_id": trace_id_var.get(), "respuesta": respuesta,
-                "descartados": [c.id for c, _ in descartados], "citas_usadas": validas}
+                "descartados": [c.id for c, _ in descartados], "citas_usadas": validas,
+                "fuentes_contexto": sorted(set(citas.values())), "sin_informacion": sin_informacion}
     except Exception as error:
-        log_evento("error", logging.ERROR, tipo=type(error).__name__, detalle=str(error)[:200])
+        # Solo el tipo de error: el mensaje podría traer parte del prompt o de la pregunta.
+        log_evento("error", logging.ERROR, tipo=type(error).__name__)
         raise
     finally:
         trace_id_var.reset(token)

@@ -13,6 +13,7 @@ Cada chunk se guarda con:
 Uso desde la raíz del repo:
     python -m src.indexar_corpus              # indexa (borra y reconstruye el índice)
     python -m src.indexar_corpus --comparar   # compara tamaños de chunk, sin llamar a la API
+    python -m src.indexar_corpus --documento pts_gen_002_bloqueo.md   # actualiza solo ese documento
 """
 import argparse
 import sys
@@ -176,6 +177,30 @@ def indexar(chunks, ids, embeddings):
     ))
 
 
+# ---------- Actualización incremental (Bloque 25) ----------
+
+def actualizar_documento(nombre: str, embeddings=None) -> tuple[int, int]:
+    """Reemplaza en el índice los chunks de UN documento, sin tocar los demás.
+
+    Borra los chunks cuya metadata "fuente" es ese archivo y agrega los nuevos con
+    sus ids predecibles. Solo calcula embeddings de ese documento. Si el archivo ya
+    no existe en corpus/, solo borra sus chunks. Devuelve (borrados, agregados).
+    """
+    vectorstore = cargar_vectorstore(embeddings)
+    viejos = vectorstore.get(where={"fuente": nombre})["ids"]
+    if viejos:
+        vectorstore.delete(ids=viejos)
+    ruta = CARPETA_CORPUS / nombre
+    if not ruta.exists():
+        return len(viejos), 0
+    chunks, ids = partir_en_chunks([(nombre, ruta.read_text(encoding="utf-8"))])
+    problemas = verificar_chunks(chunks, ids)
+    if problemas:
+        raise ValueError(f"Problemas en los chunks de {nombre}: {problemas}")
+    con_reintentos(lambda: vectorstore.add_documents(chunks, ids=ids))
+    return len(viejos), len(chunks)
+
+
 # ---------- 5. Reconexión (la usan los scripts de consulta) ----------
 
 def cargar_vectorstore(embeddings=None):
@@ -193,7 +218,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Indexa el corpus de seguridad minera en Chroma.")
     parser.add_argument("--comparar", action="store_true",
                         help="Solo compara tamaños de chunk (no llama a la API).")
+    parser.add_argument("--documento", metavar="ARCHIVO.md",
+                        help="Actualiza solo ese documento del índice (agregado, editado o borrado).")
     args = parser.parse_args()
+
+    if args.documento:
+        borrados, agregados = actualizar_documento(args.documento)
+        total = cargar_vectorstore()._collection.count()
+        print(f"{args.documento}: {borrados} chunks borrados, {agregados} agregados. "
+              f"Total en el índice: {total}")
+        return
 
     documentos = cargar_corpus()
     print(f"Corpus: {len(documentos)} documentos en {CARPETA_CORPUS.name}/")
