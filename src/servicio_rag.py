@@ -63,7 +63,8 @@ def armar_respuesta_final(resultado: dict) -> tuple[str, list[str]]:
     texto = resultado["respuesta"].strip()
     if resultado["citas_usadas"]:
         fuentes = sorted(set(resultado["citas_usadas"].values()))
-        detalle = "\n".join(f"  [{n}] {f}" for n, f in sorted(resultado["citas_usadas"].items()))
+        secciones = resultado.get("detalle_citas", {})
+        detalle = "\n".join(f"  [{n}] {secciones.get(n, f)}" for n, f in sorted(resultado["citas_usadas"].items()))
         return f"{texto}\n\nFuentes:\n{detalle}", fuentes
     if not resultado["sin_informacion"] and resultado["fuentes_contexto"]:
         fuentes = resultado["fuentes_contexto"]

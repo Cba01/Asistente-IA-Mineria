@@ -1,0 +1,497 @@
+{
+  "484a8fd07aa2": {
+    "version": 2,
+    "fecha": "2026-11-23",
+    "modelo": "gemini-3.5-flash-lite",
+    "resumen": {
+      "casos": 15,
+      "falso_no_se": 1,
+      "sin_citas": 0,
+      "citas_invalidas": 0,
+      "faltante_inventado": 1,
+      "rechazo_correcto": "1/1"
+    },
+    "detalle": [
+      {
+        "pregunta": "¿A partir de qué altura se considera trabajo en altura?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Se considera trabajo en altura toda tarea realizada a 1,8 metros o más sobre el nivel de piso donde exista riesgo de caída [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Por qué cada trabajador tiene que poner su propio candado?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Cada trabajador debe usar su propio candado para que el equipo quede bloqueado hasta que la última persona retire el suyo y nadie pueda energizarlo mientras otro sigue trabajando [1]. Además, compartir un candado entre dos trabajadores anula la protección individual [3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Sirve tirar el pull cord para dejar la correa bloqueada?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, está prohibido usar el cordón de parada de emergencia (pull cord) como bloqueo porque se puede rearmar y no reemplaza el aislamiento de la energía [1][3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Si un trabajador se fue de la faena dejando su candado instalado, este solo se puede retirar con la autorización del supervisor y del jefe de área, después de confirmar que esa persona no está en el equipo [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cómo compruebo que el equipo quedó realmente sin energía?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Para comprobar que el equipo quedó realmente sin energía, debes verificar la energía cero intentando poner en marcha el equipo desde su control local [1]. Solo después de esta prueba se puede intervenir [1]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué peligros tiene cambiar un rodillo de la correa?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Los riesgos críticos al cambiar un rodillo son el atrapamiento entre la correa y el rodillo o el tambor, la caída de material desde la correa, la energía acumulada en el sistema de tensado (contrapeso del take-up) y el sobreesfuerzo al manipular rodillos pesados [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué tengo que revisar en el arnés antes de ponérmelo?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Antes de cada uso se debe inspeccionar el arnés y los cabos de vida revisando costuras, cintas, hebillas y ganchos [1]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?",
+        "tiene_respuesta": true,
+        "falso_no_se": true,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Los documentos disponibles no tienen información suficiente para responder esta pregunta. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántas personas forman el comité paritario?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": true,
+        "rechazo_correcto": false,
+        "respuesta": "El Comité Paritario de Higiene y Seguridad está formado por tres representantes del empleador y tres representantes de los trabajadores [1]. Falta por indicar el total exacto de personas que lo componen, aunque la suma de ambos grupos es seis. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Si me accidento camino al trabajo, ¿me cubre el seguro?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Sí, se consideran accidentes del trabajo los ocurridos en el trayecto directo, de ida o regreso, entre la habitación y el lugar de trabajo [1]. El seguro cubre las prestaciones médicas y económicas del trabajador que se accidenta por causa de su trabajo [2]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿La empresa me puede cobrar los zapatos de seguridad?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, la empresa no puede cobrarte los zapatos de seguridad, ya que debe proporcionarlos en forma gratuita [1][2]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué enfermedad puede dar respirar polvo de sílice?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "La exposición prolongada a la sílice cristalina puede producir silicosis [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué institución fiscaliza la seguridad en las minas?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "El Servicio Nacional de Geología y Minería (Sernageomin) fiscaliza la seguridad en la industria extractiva minera [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Es obligatorio contar con un Departamento de Prevención de Riesgos Profesionales en las empresas con más de 100 trabajadores [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántos días de vacaciones le corresponden a un trabajador minero?",
+        "tiene_respuesta": false,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": true,
+        "respuesta": "Los documentos disponibles no tienen información suficiente para responder esta pregunta.\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      }
+    ]
+  },
+  "57d06abbb35d": {
+    "version": 3,
+    "fecha": "2026-11-23",
+    "modelo": "gemini-3.5-flash-lite",
+    "resumen": {
+      "casos": 15,
+      "falso_no_se": 0,
+      "sin_citas": 0,
+      "citas_invalidas": 0,
+      "faltante_inventado": 2,
+      "rechazo_correcto": "1/1"
+    },
+    "detalle": [
+      {
+        "pregunta": "¿A partir de qué altura se considera trabajo en altura?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Se considera trabajo en altura toda tarea realizada a 1,8 metros o más sobre el nivel de piso donde exista riesgo de caída [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Por qué cada trabajador tiene que poner su propio candado?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Porque así el equipo queda bloqueado hasta que la última persona retire su candado para asegurar que nadie pueda energizar el equipo mientras otro sigue trabajando [1]. Además, compartir un candado anula la protección individual [3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Sirve tirar el pull cord para dejar la correa bloqueada?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, está prohibido usar el cordón de parada de emergencia (pull cord) como bloqueo, porque se puede rearmar y no reemplaza el aislamiento de la energía [1][3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "El candado solo se puede retirar con la autorización del supervisor y del jefe de área, después de confirmar que esa persona no está en el equipo [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cómo compruebo que el equipo quedó realmente sin energía?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Para comprobar que el equipo quedó realmente sin energía, debes verificar energía cero intentando poner en marcha el equipo desde su control local, y solo después de esta prueba se puede intervenir [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué peligros tiene cambiar un rodillo de la correa?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Los riesgos críticos al cambiar un rodillo son el atrapamiento entre la correa y el rodillo o el tambor, la caída de material desde la correa, la energía acumulada en el sistema de tensado (contrapeso del take-up) y el sobreesfuerzo al manipular rodillos pesados [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué tengo que revisar en el arnés antes de ponérmelo?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Antes de cada uso se debe inspeccionar el arnés revisando las costuras, cintas, hebillas y ganchos [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": true,
+        "rechazo_correcto": false,
+        "respuesta": "El vigía nunca ingresa a rescatar, debe dar la alarma y activar el plan de rescate [1]. Falta información sobre el procedimiento específico de rescate y los detalles del estanque. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántas personas forman el comité paritario?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": true,
+        "rechazo_correcto": false,
+        "respuesta": "El Comité Paritario de Higiene y Seguridad está formado por tres representantes del empleador y tres representantes de los trabajadores [1]. Falta por responder la suma total de sus integrantes. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Si me accidento camino al trabajo, ¿me cubre el seguro?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Sí, se consideran accidentes del trabajo los ocurridos en el trayecto directo, de ida o regreso, entre la habitación y el lugar de trabajo [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿La empresa me puede cobrar los zapatos de seguridad?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, la empresa debe proporcionar los elementos de protección personal en forma gratuita [1][2]. \n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué enfermedad puede dar respirar polvo de sílice?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "La exposición prolongada a la sílice cristalina puede producir silicosis [1]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué institución fiscaliza la seguridad en las minas?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "La institución que fiscaliza es el Servicio Nacional de Geología y Minería (Sernageomin) [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Es obligatorio contar con un Departamento de Prevención de Riesgos Profesionales en empresas con más de 100 trabajadores [1]. \n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántos días de vacaciones le corresponden a un trabajador minero?",
+        "tiene_respuesta": false,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": true,
+        "respuesta": "Los documentos disponibles no tienen información suficiente para responder esta pregunta.\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      }
+    ]
+  },
+  "da9912965f6a": {
+    "version": 4,
+    "fecha": "2026-11-23",
+    "modelo": "gemini-3.5-flash-lite",
+    "resumen": {
+      "casos": 15,
+      "falso_no_se": 0,
+      "sin_citas": 0,
+      "citas_invalidas": 0,
+      "faltante_inventado": 0,
+      "rechazo_correcto": "1/1"
+    },
+    "detalle": [
+      {
+        "pregunta": "¿A partir de qué altura se considera trabajo en altura?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Se considera trabajo en altura toda tarea realizada a 1,8 metros o más sobre el nivel de piso donde exista riesgo de caída [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Por qué cada trabajador tiene que poner su propio candado?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Cada trabajador usa su propio candado y tarjeta para que el equipo quede bloqueado hasta que la última persona retire su candado y nadie pueda energizarlo mientras otro sigue trabajando [1]. Compartir un candado entre dos trabajadores anula la protección individual [3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Sirve tirar el pull cord para dejar la correa bloqueada?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, está prohibido usar el cordón de parada de emergencia (pull cord) como bloqueo, porque se puede rearmar y no reemplaza el aislamiento de la energía [1][3].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Un compañero se fue a su casa y dejó su candado puesto, ¿quién lo puede sacar?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "El candado solo se puede retirar con la autorización del supervisor y del jefe de área, después de confirmar que esa persona no está en el equipo [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cómo compruebo que el equipo quedó realmente sin energía?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Verificando energía cero intentando poner en marcha el equipo desde su control local, y solo después de esta prueba se puede intervenir [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué peligros tiene cambiar un rodillo de la correa?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Los riesgos críticos son el atrapamiento entre la correa y el rodillo o el tambor, la caída de material desde la correa, la energía acumulada en el sistema de tensado (contrapeso del take-up) y el sobreesfuerzo al manipular rodillos pesados [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué tengo que revisar en el arnés antes de ponérmelo?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Antes de cada uso se debe inspeccionar las costuras, cintas, hebillas y ganchos del arnés [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué debe hacer el vigía si alguien se desmaya dentro del estanque?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "El vigía nunca ingresa a rescatar, sino que da la alarma y activa el plan de rescate [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántas personas forman el comité paritario?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Lo forman tres representantes del empleador y tres representantes de los trabajadores [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "Si me accidento camino al trabajo, ¿me cubre el seguro?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Sí, también se consideran accidentes del trabajo los ocurridos en el trayecto directo, de ida o regreso, entre la habitación y el lugar de trabajo [1], los cuales están cubiertos por el seguro social obligatorio de la Ley 16.744 [2].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿La empresa me puede cobrar los zapatos de seguridad?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "No, el empleador debe proporcionar los elementos de protección personal a los trabajadores en forma gratuita [1][2]. Recuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué enfermedad puede dar respirar polvo de sílice?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "La exposición prolongada a la sílice cristalina puede producir silicosis [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Qué institución fiscaliza la seguridad en las minas?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "El Servicio Nacional de Geología y Minería (Sernageomin) [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Desde cuántos trabajadores es obligatorio tener un departamento de prevención?",
+        "tiene_respuesta": true,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": false,
+        "respuesta": "Es obligatorio contar con un Departamento de Prevención de Riesgos Profesionales en las empresas que tienen más de 100 trabajadores [1].\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      },
+      {
+        "pregunta": "¿Cuántos días de vacaciones le corresponden a un trabajador minero?",
+        "tiene_respuesta": false,
+        "falso_no_se": false,
+        "sin_citas": false,
+        "citas_invalidas": 0,
+        "faltante_inventado": false,
+        "rechazo_correcto": true,
+        "respuesta": "Los documentos disponibles no tienen información suficiente para responder esta pregunta.\n\nRecuerda que esta orientación no reemplaza el procedimiento oficial de la faena ni las instrucciones del supervisor."
+      }
+    ]
+  }
+}

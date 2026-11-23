@@ -108,12 +108,17 @@ def test_registro_versiona_sin_duplicar_y_persiste(tmp_path):
     assert v1["huella"] != v2["huella"] and registro.ultima("p") == v2
     assert RegistroDePrompts(archivo).buscar(v1["huella"])["nota"] == "inicial"
     assert "+corregido" in diff_prompts(v1["texto"], v2["texto"])
+    # registrar de nuevo una versión ANTIGUA tampoco la duplica
+    registro.registrar("p", "texto uno", "yo", "otra vez", "m")
+    assert len(registro.historial("p")) == 2
 
 
-def test_historial_real_del_prompt_rag_tiene_tres_versiones_distintas():
+def test_historial_real_del_prompt_rag_reproduce_las_huellas_registradas():
+    from src.logging_rag import PROMPT_HUELLA
     from src.registro_prompts import versiones_prompt_rag
     huellas = [huella_prompt(t) for t, _, _ in versiones_prompt_rag()]
-    assert len(set(huellas)) == 3
+    assert huellas[:3] == ["5eb23241e3f4", "484a8fd07aa2", "57d06abbb35d"]
+    assert len(set(huellas)) == 4 and huellas[-1] == PROMPT_HUELLA
 
 # ---------- Bloque 32: supervisión ----------
 
@@ -141,6 +146,21 @@ def test_grafo_se_detiene_y_solo_aprueba_con_resume_true(despliegue):
         resolver(app, config, True)
 
 
+def test_quien_aprueba_ve_la_evaluacion(tmp_path):
+    registro = RegistroDePrompts(tmp_path / "registro.json")
+    a = registro.registrar("prompt_rag", "versión A", "yo", "a", "m")
+    b = registro.registrar("prompt_rag", "versión B", "yo", "b", "m")
+    evaluacion = tmp_path / "evaluacion.json"
+    evaluacion.write_text(json.dumps({b["huella"]: {"resumen": {"falso_no_se": 0}}}), encoding="utf-8")
+    app = construir_grafo(registro, tmp_path / "activa.json", archivo_evaluacion=evaluacion)
+    config = nuevo_config()
+    app.invoke({"nombre": "prompt_rag", "huella_actual": a["huella"], "huella_nueva": b["huella"],
+                "aprobado": False}, config=config)
+    pendiente = app.get_state(config).interrupts[0].value
+    assert pendiente["evaluacion_propuesta"] == {"falso_no_se": 0}
+    assert pendiente["evaluacion_actual"] is None
+
+
 def test_camino_de_rechazo_no_cambia_la_version_activa(despliegue):
     app, entrada, activa, _ = despliegue
     config = nuevo_config()
@@ -165,3 +185,32 @@ def test_matriz_del_proyecto_es_valida():
 def test_validar_detecta_alto_sin_supervision():
     filas = evaluar([{**RIESGOS[0], "supervision": ""}] + RIESGOS[1:])
     assert any("sin punto de supervisión" in p for p in validar(filas))
+
+# ---------- Evaluación de la generación ----------
+
+def test_mensajes_para_reproduce_cada_formato_de_prompt():
+    from src.evaluar_generacion import mensajes_para
+    v2 = "Instrucciones.\nContexto:\n{contexto}\n\nPregunta: {pregunta}\n\nRespuesta:"
+    v3 = "Sistema.\n\n<contexto>\n{contexto}\n</contexto>\n\nPregunta: {pregunta}"
+    m2 = mensajes_para(v2, "¿p?", [LIMPIO])
+    m3 = mensajes_para(v3, "¿p?", [LIMPIO])
+    assert len(m2) == 1 and "[1] 5. Verificar" in m2[0].content
+    assert isinstance(m3[0], SystemMessage) and m3[0].content == "Sistema."
+    assert m3[1].content.startswith("<contexto>\n[1] 5. Verificar") and "Pregunta: ¿p?" in m3[1].content
+
+
+def test_clasificar_detecta_cada_falla():
+    from src.evaluar_generacion import clasificar, resumir
+    caso = {"pregunta": "p", "ids_relevantes": {"pts_gen_002_bloqueo_4"}}
+    sin_resp = {"pregunta": "v", "ids_relevantes": set()}
+    c1 = clasificar(caso, [LIMPIO], f"{lr.SIN_INFORMACION}")
+    c2 = clasificar(caso, [LIMPIO], "Verifica energía cero. Falta el dato del total.")
+    c3 = clasificar(caso, [LIMPIO], "Verifica energía cero [1][4].")
+    c4 = clasificar(sin_resp, [LIMPIO], f"{lr.SIN_INFORMACION}")
+    assert c1["falso_no_se"] and not c1["sin_citas"]
+    assert c2["sin_citas"] and c2["faltante_inventado"]
+    assert c3["citas_invalidas"] == 1 and not c3["sin_citas"]
+    assert c4["rechazo_correcto"] and not c4["falso_no_se"]
+    r = resumir([c1, c2, c3, c4])
+    assert (r["falso_no_se"], r["sin_citas"], r["citas_invalidas"], r["faltante_inventado"],
+            r["rechazo_correcto"]) == (1, 1, 1, 1, "1/1")

@@ -50,9 +50,11 @@ RIESGOS = [
                     "aprobado por el jefe de área"},
     {"riesgo": "Un cambio de prompt empeora las respuestas sin que nadie lo note",
      "probabilidad": 3, "impacto": 3,
-     "evidencia": "El prompt del RAG cambió 3 veces en un día (prompts/registro_versiones.json)",
-     "mitigacion": "Versionado con huella, huella del prompt en cada log y evaluación repetible del "
-                   "Bloque 27",
+     "evidencia": "El prompt del RAG tuvo 4 versiones; la v3 se aprobó sin medir y agregó faltantes "
+                  "inventados (2 de 15), corregidos en la v4 aprobada con evaluación",
+     "mitigacion": "Versionado con huella, huella del prompt en cada log, evaluación de la generación "
+                   "por versión (src/evaluar_generacion.py) y el servicio se niega a responder con un "
+                   "prompt no aprobado (src/servicio_rag.py, Gate 2)",
      "supervision": "Grafo de aprobación antes de activar una versión (src/grafo_supervision.py, Bloque 32)"},
     {"riesgo": "API caída o cuota agotada (429/503) justo durante una consulta de emergencia",
      "probabilidad": 3, "impacto": 4,
@@ -63,8 +65,8 @@ RIESGOS = [
      "probabilidad": 3, "impacto": 2,
      "evidencia": "3 casos reales: estanque (Bloque 26), vigía (Bloque 28) y otra pregunta del vigía con "
                   "el prompt v3 (Bloque 31), siempre con el chunk correcto recuperado",
-     "mitigacion": "Ajuste de prompt v2 (relacionar términos) y campo sin_informacion en los registros "
-                   "(Bloque 28)",
+     "mitigacion": "Prompts v2 y v4 (relacionar términos, no decir 'no sé' si algún fragmento trata el "
+                   "tema), campo sin_informacion en logs y evaluación de la generación (Gate 2)",
      "supervision": ""},
     {"riesgo": "PTS revisado en la faena pero no reindexado: el asistente cita una versión vieja",
      "probabilidad": 2, "impacto": 4,

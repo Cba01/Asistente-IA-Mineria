@@ -5,9 +5,12 @@ El grafo se DETIENE en supervisar hasta que una persona responde. Solo si aprueb
 "aplicar" escribe la huella en prompts/version_activa.json; si rechaza, la versión
 activa no cambia.
 
-Uso desde la raíz del repo:  python -m src.grafo_supervision
+Uso desde la raíz del repo:
+    python -m src.grafo_supervision                  # pide tu decisión sobre la última versión
+    python -m src.grafo_supervision --demo-rechazo   # además muestra el camino de rechazo
 """
 import json
+import sys
 import uuid
 from pathlib import Path
 from typing import TypedDict
@@ -18,6 +21,8 @@ from langgraph.types import Command, interrupt
 
 from src.indexar_corpus import RAIZ
 from src.registro_prompts import ARCHIVO_REGISTRO, RegistroDePrompts, diff_prompts, resumen_diff
+
+ARCHIVO_EVALUACION = RAIZ / "docs" / "evaluacion_generacion.json"
 
 ARCHIVO_ACTIVA = RAIZ / "prompts" / "version_activa.json"
 
@@ -33,7 +38,15 @@ def leer_activas(archivo: Path = ARCHIVO_ACTIVA) -> dict:
     return json.loads(Path(archivo).read_text(encoding="utf-8")) if Path(archivo).exists() else {}
 
 
-def construir_grafo(registro: RegistroDePrompts, archivo_activa: Path = ARCHIVO_ACTIVA, checkpointer=None):
+def leer_resumen_evaluacion(huella: str, archivo: Path = ARCHIVO_EVALUACION) -> dict | None:
+    """Resultados de src/evaluar_generacion.py para esa versión, si existen."""
+    if not Path(archivo).exists():
+        return None
+    return json.loads(Path(archivo).read_text(encoding="utf-8")).get(huella, {}).get("resumen")
+
+
+def construir_grafo(registro: RegistroDePrompts, archivo_activa: Path = ARCHIVO_ACTIVA, checkpointer=None,
+                    archivo_evaluacion: Path = ARCHIVO_EVALUACION):
     def proponer(estado: EstadoDespliegue):
         return {}
 
@@ -47,6 +60,9 @@ def construir_grafo(registro: RegistroDePrompts, archivo_activa: Path = ARCHIVO_
             "huella_propuesta": estado["huella_nueva"],
             "nota": nueva["nota"] if nueva else None,
             "cambios": resumen_diff(actual["texto"], nueva["texto"]) if actual and nueva else None,
+            # Quien aprueba ve los números de la evaluación, no solo el texto del cambio.
+            "evaluacion_actual": leer_resumen_evaluacion(estado["huella_actual"], archivo_evaluacion),
+            "evaluacion_propuesta": leer_resumen_evaluacion(estado["huella_nueva"], archivo_evaluacion),
         })
         if not isinstance(decision, bool):
             # Un texto como "no" es verdadero en Python: solo se aceptan True o False.
@@ -91,7 +107,13 @@ def main() -> None:
     historial = registro.historial("prompt_rag")
     if len(historial) < 2:
         raise SystemExit("Primero corre: python -m src.registro_prompts")
-    anterior, nueva = historial[-2], historial[-1]
+    nueva = historial[-1]
+    huella_activa = leer_activas().get("prompt_rag")
+    anterior = registro.buscar(huella_activa) or historial[-2]
+    if anterior["huella"] == nueva["huella"]:
+        raise SystemExit(f"La última versión ({nueva['huella']}) ya es la activa: no hay nada que aprobar.")
+    if leer_resumen_evaluacion(nueva["huella"]) is None:
+        print("ATENCIÓN: esta versión no tiene evaluación. Corre antes: python -m src.evaluar_generacion\n")
     app = construir_grafo(registro)
     entrada = {"nombre": "prompt_rag", "huella_actual": anterior["huella"],
                "huella_nueva": nueva["huella"], "aprobado": False}
@@ -111,10 +133,11 @@ def main() -> None:
     except ValueError as error:
         print("Segundo intento sobre la misma solicitud:", error)
 
-    print("\n=== Solicitud 2: camino de rechazo (otro thread_id) ===")
-    config2 = nuevo_config()
-    app.invoke(entrada, config=config2)
-    print("estado final:", resolver(app, config2, False))
+    if "--demo-rechazo" in sys.argv:
+        print("\n=== Solicitud 2: camino de rechazo (otro thread_id) ===")
+        config2 = nuevo_config()
+        app.invoke(entrada, config=config2)
+        print("estado final:", resolver(app, config2, False))
 
     print("\nVersión activa en prompts/version_activa.json:", leer_activas())
 
