@@ -159,7 +159,7 @@ Cada consulta hace **2 llamadas a la API**: una de embeddings y una de generaci�
 ### Ejecutar las pruebas
 
 ```bash
-python -m pytest                     # todas (141), sin llamar a la API
+python -m pytest                     # todas (145), sin llamar a la API
 python -m pytest tests/test_gate2.py -v   # los 4 criterios no compensables del Gate 2
 ```
 
@@ -170,6 +170,8 @@ python -m pytest tests/test_gate2.py -v   # los 4 criterios no compensables del 
 ### Logs sin datos sensibles
 
 Cada consulta deja una línea JSON por etapa en `logs/rag.jsonl`, todas con el mismo `trace_id`: recuperación, chunks descartados, tokens consumidos, fuentes citadas, citas inválidas. **La pregunta y la respuesta no se guardan**: solo su largo y una huella (sha256), porque una pregunta puede incluir datos personales, como un código de trabajador. Lo comprueba `tests/test_gate2.py::test_3_logs_sin_contenido_crudo`.
+
+Las trazas del agente (`trazas_agente.jsonl`) enmascaran los datos personales antes de escribirse: códigos de trabajador (`T-****`), correos, RUT y teléfonos. `python -m src.verificar_entorno` revisa **todos** los archivos de log del repo y avisa si encuentra alguno. `python -m src.redactar_trazas` corrige las líneas antiguas.
 
 ### Defensa contra inyección de prompt
 
@@ -255,7 +257,7 @@ Asistente-IA-Mineria/
 │   ├── evaluacion_recuperacion.py, registro_rag.py, matriz_riesgos.py, decision.py, ...
 │   ├── agente.py               # Agente con herramientas y memoria (U2.4)
 │   └── cliente.py, consumir_gemini.py, ...   # Cliente de la API (Módulo 1 y U2.1)
-├── tests/                      # 141 pruebas con pytest (sin API)
+├── tests/                      # 145 pruebas con pytest (sin API)
 ├── docs/                       # Decisiones, evaluaciones y matriz de riesgos
 ├── main.py                     # Miniaplicación del Gate 1
 └── requirements.txt

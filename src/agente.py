@@ -323,11 +323,37 @@ def config_sesion(session_id: str) -> dict:
 
 # ---------- Trazas de decisión ----------
 
+# Datos personales que nunca se escriben en las trazas (criterio no compensable del Gate 2).
+PATRONES_PII = [
+    (r"\bT-\d{3,6}\b", "T-****"),                                   # código de trabajador
+    (r"[\w.+-]+@[\w-]+\.[\w.]+", "[correo]"),                        # correo electrónico
+    (r"\b\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]\b", "[rut]"),              # RUT chileno
+    # Celular chileno, sin dígitos ni punto decimal pegados: así un costo como
+    # 0.00022229999999999998 no se confunde con un teléfono.
+    (r"(?<![\d.])(?:\+?56\s?)?9\s?\d{4}\s?\d{4}(?![\d])", "[telefono]"),
+]
+
+
+def redactar_pii(valor):
+    """Enmascara datos personales en un texto, o en los textos dentro de un dict o una lista."""
+    import re
+    if isinstance(valor, str):
+        for patron, reemplazo in PATRONES_PII:
+            valor = re.sub(patron, reemplazo, valor)
+        return valor
+    if isinstance(valor, dict):
+        return {k: redactar_pii(v) for k, v in valor.items()}
+    if isinstance(valor, list):
+        return [redactar_pii(v) for v in valor]
+    return valor
+
+
 def registrar_traza(session_id: str, entrada: str, resultado: dict, archivo: Path = None) -> None:
     """Guarda una interacción del agente como una línea JSON: qué se preguntó,
-    qué herramientas usó, con qué argumentos, qué observó y qué respondió."""
+    qué herramientas usó, con qué argumentos, qué observó y qué respondió.
+    Los datos personales (códigos de trabajador, correos, RUT, teléfonos) se enmascaran."""
     archivo = archivo or ARCHIVO_TRAZAS
-    registro = {
+    registro = redactar_pii({
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "session_id": session_id,
         "entrada": entrada,
@@ -336,7 +362,7 @@ def registrar_traza(session_id: str, entrada: str, resultado: dict, archivo: Pat
                      for accion, observacion in resultado.get("intermediate_steps", [])],
         "respuesta_final": texto_de_salida(resultado.get("output", "")),
         "aclaracion_agregada": resultado.get("aclaracion_agregada", False),
-    }
+    })
     with open(archivo, "a", encoding="utf-8") as f:
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 

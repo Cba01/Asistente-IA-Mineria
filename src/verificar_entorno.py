@@ -51,6 +51,21 @@ def main() -> int:
     if aprobada != PROMPT_HUELLA:
         problemas.append("aprobar la versión actual del prompt (python -m src.grafo_supervision)")
 
+    # Ningún log del repo puede tener datos personales en texto plano (criterio no compensable 3).
+    import re
+    from src.agente import PATRONES_PII
+    archivos_log = [RAIZ / "trazas_agente.jsonl", RAIZ / "aprobaciones_agente.jsonl",
+                    RAIZ / "registros_latencia_costo.jsonl", *sorted((RAIZ / "logs").glob("*.jsonl"))]
+    con_pii = []
+    for archivo in archivos_log:
+        if archivo.exists():
+            texto = archivo.read_text(encoding="utf-8")
+            if any(re.search(patron, texto) for patron, _ in PATRONES_PII):
+                con_pii.append(archivo.name)
+    print("Datos personales en logs:", ", ".join(con_pii) if con_pii else "ninguno")
+    if con_pii:
+        problemas.append(f"enmascarar datos personales en {', '.join(con_pii)} (python -m src.redactar_trazas)")
+
     print()
     if problemas:
         print("Pendiente: " + "; ".join(problemas))
